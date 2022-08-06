@@ -1,0 +1,12 @@
+.profile__info {
+  color: #fff;
+  display: flex;
+  align-items: baseline;
+  position: relative;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__info {
+    margin-bottom: 36px;
+  }
+}
