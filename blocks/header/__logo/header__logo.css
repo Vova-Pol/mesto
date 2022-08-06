@@ -3,11 +3,13 @@
   height: 33px;
   margin-bottom: 41px;
   box-sizing: border-box;
+  background-image: url(../../../images/logo.png);
+  background-size: contain;
 }
 
 @media screen and (max-width: 767px) {
   .header__logo {
-    padding-left: 27px;
+    margin-left: 27px;
     margin-bottom: 31px;
     width: 103px;
     height: 24px;
