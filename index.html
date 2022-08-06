@@ -154,17 +154,21 @@
         <p class="footer__text">&copy;2020 Mesto Russia</p>
       </footer>
       <div class="popup">
-        <div class="popup__container">
+        <form class="popup__container">
           <h3 class="popup__title">Редактировать профиль</h3>
-          <input type="text" placeholder="Имя" class="popup__input" />
+          <input
+            type="text"
+            placeholder="Имя"
+            class="popup__input popup__input-name"
+          />
           <input
             type="text"
             placeholder="Род деятельности"
-            class="popup__input"
+            class="popup__input popup__input-occupation"
           />
-          <button class="popup__save-button">Сохранить</button>
-          <button class="popup__close-button"></button>
-        </div>
+          <button class="popup__save-button" type="submit">Сохранить</button>
+          <button class="popup__close-button" type="button"></button>
+        </form>
       </div>
     </div>
     <script src="script.js"></script>
