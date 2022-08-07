@@ -10,6 +10,7 @@
   text-align: center;
   margin: 0 auto 37px auto;
   transition: opacity 0.3s;
+  border: 0;
 }
 .popup__save-button:hover {
   opacity: 0.8;
