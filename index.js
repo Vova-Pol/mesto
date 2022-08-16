@@ -81,9 +81,9 @@ popupEditCloseButton.addEventListener("click", popupEditClose);
 
 /* ----- Popup Edit: Edit Profile Function ----- */
 
-const formElement = popupEdit.querySelector(".popup__container");
+const editFormElement = popupEdit.querySelector(".popup__container");
 
-function formSubmitHandler(evt) {
+function editFormSubmitHandler(evt) {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -92,13 +92,15 @@ function formSubmitHandler(evt) {
   popupEditClose();
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
+editFormElement.addEventListener("submit", editFormSubmitHandler);
 
 /* ----- Popup Add Post: Open/Close Function ----- */
 
-const popupAddPost = document.getElementById("popup-add-post");
+const popupAddPost = page.querySelector("#popup-add-post");
 
 function popupAddPostOpen() {
+  placeNameInput.value = "";
+  placeLinkInput.value = "";
   popupAddPost.classList.add("popup_opened");
 }
 
@@ -118,5 +120,29 @@ popupAddPostCloseButton.addEventListener("click", popupAddPostClose);
 
 /* ----- Popup Add Post: Add Post Function ----- */
 
-const placeNameInput = document.getElementById("popup__input_type_place-name");
-const placeLinkInput = document.getElementById("popup__input_type_place-link");
+const placeNameInput = popupAddPost.querySelector(
+  "#popup__input_type_place-name"
+);
+const placeLinkInput = popupAddPost.querySelector(
+  "#popup__input_type_place-link"
+);
+
+const addFormElement = popupAddPost.querySelector(".popup__container");
+
+function addFormSubmitHandler(evt) {
+  evt.preventDefault();
+
+  let placeCardElement = placeCardTemplate
+    .querySelector(".elements__item")
+    .cloneNode(true);
+
+  placeCardElement.querySelector(".elements__image").src = placeLinkInput.value;
+  placeCardElement.querySelector(".elements__image").alt = placeNameInput.value;
+  placeCardElement.querySelector(".elements__title").textContent =
+    placeNameInput.value;
+
+  cardsList.prepend(placeCardElement);
+  popupAddPostClose();
+}
+
+addFormElement.addEventListener("submit", addFormSubmitHandler);
