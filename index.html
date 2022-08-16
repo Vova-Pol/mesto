@@ -29,80 +29,26 @@
           </article>
           <button class="profile__add-button"></button>
         </section>
+
         <section class="elements section-sizing">
           <ul class="elements__list">
-            <li class="elements__item">
-              <img
-                src="./images/karachaevsk.png"
-                alt="карачаевск"
-                class="elements__image"
-              />
-              <div class="elements__info">
-                <h2 class="elements__title">Карачаевск</h2>
-                <button class="elements__like-button"></button>
-              </div>
-            </li>
-            <li class="elements__item">
-              <img
-                src="./images/elbrus.png"
-                alt="эльбрус"
-                class="elements__image"
-              />
-              <div class="elements__info">
-                <h2 class="elements__title">Гора Эльбрус</h2>
-                <button class="elements__like-button"></button>
-              </div>
-            </li>
-            <li class="elements__item">
-              <img
-                src="./images/dombai.png"
-                alt="домбай"
-                class="elements__image"
-              />
-              <div class="elements__info">
-                <h2 class="elements__title">Домбай</h2>
-                <button class="elements__like-button"></button>
-              </div>
-            </li>
-            <li class="elements__item">
-              <img
-                src="./images/elbrus.png"
-                alt="эльбрус"
-                class="elements__image"
-              />
-              <div class="elements__info">
-                <h2 class="elements__title">Гора Эльбрус</h2>
-                <button class="elements__like-button"></button>
-              </div>
-            </li>
-            <li class="elements__item">
-              <img
-                src="./images/dombai.png"
-                alt="домбай"
-                class="elements__image"
-              />
-              <div class="elements__info">
-                <h2 class="elements__title">Домбай</h2>
-                <button class="elements__like-button"></button>
-              </div>
-            </li>
-            <li class="elements__item">
-              <img
-                src="./images/karachaevsk.png"
-                alt="карачаевск"
-                class="elements__image"
-              />
-              <div class="elements__info">
-                <h2 class="elements__title">Карачаево-Черкесия</h2>
-                <button class="elements__like-button"></button>
-              </div>
-            </li>
+            <template id="place-card">
+              <li class="elements__item">
+                <img src="" alt="" class="elements__image" />
+                <div class="elements__info">
+                  <h2 class="elements__title"></h2>
+                  <button class="elements__like-button"></button>
+                </div>
+              </li>
+            </template>
           </ul>
         </section>
       </main>
+
       <footer class="footer section-sizing">
         <p class="footer__text">&copy;2020 Mesto Russia</p>
       </footer>
+
       <div class="popup" id="popup-edit">
         <form class="popup__container">
           <h3 class="popup__title">Редактировать профиль</h3>
@@ -122,6 +68,7 @@
           <button class="popup__close-button" type="button"></button>
         </form>
       </div>
+
       <div class="popup" id="popup-add-post">
         <form class="popup__container">
           <h3 class="popup__title">Новое место</h3>
