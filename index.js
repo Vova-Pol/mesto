@@ -156,3 +156,14 @@ likeButtons.forEach((btn) => {
     btn.classList.toggle("elements__like-button_active");
   });
 });
+
+/* ----- Delete Button ----- */
+
+const deleteButtons = page.querySelectorAll(".elements__delete-button");
+
+deleteButtons.forEach((btn) => {
+  btn.addEventListener("click", function () {
+    const placeCard = btn.closest(".elements__item");
+    placeCard.remove();
+  });
+});
