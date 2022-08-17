@@ -146,3 +146,13 @@ function addFormSubmitHandler(evt) {
 }
 
 addFormElement.addEventListener("submit", addFormSubmitHandler);
+
+/* ----- Like Button ----- */
+
+const likeButtons = page.querySelectorAll(".elements__like-button");
+
+likeButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    btn.classList.toggle("elements__like-button_active");
+  });
+});

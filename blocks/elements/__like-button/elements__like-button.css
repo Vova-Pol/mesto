@@ -10,10 +10,6 @@
   background-color: #fff;
 }
 
-.elements__like-button:active {
-  background-image: url(../../../images/like-button-active.png);
-}
-
 .elements__like-button:hover {
   opacity: 0.5;
 }
