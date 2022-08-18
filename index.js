@@ -175,9 +175,11 @@ const popupImage = page.querySelector("#popup-image");
 function popupImageOpen(evt) {
   const cardImg = evt.target;
   const popupImg = popupImage.querySelector(".popup__image");
+  const popupSubtitle = popupImage.querySelector(".popup__subtitle");
 
   popupImg.src = cardImg.src;
   popupImg.alt = cardImg.alt;
+  popupSubtitle.textContent = cardImg.alt;
 
   popupImage.classList.add("popup_opened");
 }
