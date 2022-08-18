@@ -167,3 +167,23 @@ deleteButtons.forEach((btn) => {
     placeCard.remove();
   });
 });
+
+/* ----- Popup Image: Open/Close Function ----- */
+
+const popupImage = page.querySelector("#popup-image");
+
+function popupImageOpen(evt) {
+  const cardImg = evt.target;
+  const popupImg = popupImage.querySelector(".popup__image");
+
+  popupImg.src = cardImg.src;
+  popupImg.alt = cardImg.alt;
+
+  popupImage.classList.add("popup_opened");
+}
+
+const cardsImages = page.querySelectorAll(".elements__image");
+
+cardsImages.forEach(function (img) {
+  img.addEventListener("click", popupImageOpen);
+});
