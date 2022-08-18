@@ -52,3 +52,4 @@
 
 /* Img Pop-up */
 @import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__image-container/popup__image-container.css);

@@ -187,3 +187,11 @@ const cardsImages = page.querySelectorAll(".elements__image");
 cardsImages.forEach(function (img) {
   img.addEventListener("click", popupImageOpen);
 });
+
+function popupImageClose() {
+  popupImage.classList.remove("popup_opened");
+}
+
+const popupImageCloseButton = popupImage.querySelector(".popup__close-button");
+
+popupImageCloseButton.addEventListener("click", popupImageClose);
