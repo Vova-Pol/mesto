@@ -54,11 +54,11 @@ addCardsFromBox(cardsFromBox);
 
 /* ----- Popup Edit: Open/Close Function ----- */
 
-const popupEdit = document.getElementById("popup-edit");
+const popupEdit = page.querySelector("#popup-edit");
 
 const editButton = page.querySelector(".profile__edit-button");
-const nameInput = document.getElementById("popup__input_type_name");
-const occupationInput = document.getElementById("popup__input_type_occupation");
+const nameInput = page.querySelector("#popup-edit-name");
+const occupationInput = page.querySelector("#popup-edit-occupation");
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 
@@ -120,12 +120,8 @@ popupAddPostCloseButton.addEventListener("click", popupAddPostClose);
 
 /* ----- Popup Add Post: Add Post Function ----- */
 
-const placeNameInput = popupAddPost.querySelector(
-  "#popup__input_type_place-name"
-);
-const placeLinkInput = popupAddPost.querySelector(
-  "#popup__input_type_place-link"
-);
+const placeNameInput = popupAddPost.querySelector("#popup-place-name");
+const placeLinkInput = popupAddPost.querySelector("#popup-place-link");
 
 const addFormElement = popupAddPost.querySelector(".popup__container");
 
