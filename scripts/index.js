@@ -54,22 +54,22 @@ const occupationInput = page.querySelector("#popup-edit-occupation");
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 
-function popupEditOpen() {
+function openPopupEdit() {
   nameInput.value = profileName.textContent;
   occupationInput.value = profileOccupation.textContent;
 
   popupEdit.classList.add("popup_opened");
 }
 
-editButton.addEventListener("click", popupEditOpen);
+editButton.addEventListener("click", openPopupEdit);
 
 const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
 
-function popupEditClose() {
+function closePopupEdit() {
   popupEdit.classList.remove("popup_opened");
 }
 
-popupEditCloseButton.addEventListener("click", popupEditClose);
+popupEditCloseButton.addEventListener("click", closePopupEdit);
 
 /* ----- Popup Edit: Edit Profile Function ----- */
 
@@ -81,7 +81,7 @@ function editFormSubmitHandler(evt) {
   profileName.textContent = nameInput.value;
   profileOccupation.textContent = occupationInput.value;
 
-  popupEditClose();
+  closePopupEdit();
 }
 
 editFormElement.addEventListener("submit", editFormSubmitHandler);
@@ -90,7 +90,7 @@ editFormElement.addEventListener("submit", editFormSubmitHandler);
 
 const popupAddPost = page.querySelector("#popup-add-post");
 
-function popupAddPostOpen() {
+function openPopupAddPost() {
   placeNameInput.value = "";
   placeLinkInput.value = "";
   popupAddPost.classList.add("popup_opened");
@@ -98,9 +98,9 @@ function popupAddPostOpen() {
 
 const addPostButton = page.querySelector(".profile__add-button");
 
-addPostButton.addEventListener("click", popupAddPostOpen);
+addPostButton.addEventListener("click", openPopupAddPost);
 
-function popupAddPostClose() {
+function closePopupAddPost() {
   popupAddPost.classList.remove("popup_opened");
 }
 
@@ -108,7 +108,7 @@ const popupAddPostCloseButton = popupAddPost.querySelector(
   ".popup__close-button"
 );
 
-popupAddPostCloseButton.addEventListener("click", popupAddPostClose);
+popupAddPostCloseButton.addEventListener("click", closePopupAddPost);
 
 /* ----- Popup Add Post: Add Post Function ----- */
 
@@ -128,27 +128,16 @@ function addFormSubmitHandler(evt) {
     placeNameInput.value;
 
   cardsList.prepend(placeCardElement);
-  popupAddPostClose();
+  closePopupAddPost();
 }
 
 addFormElement.addEventListener("submit", addFormSubmitHandler);
-
-/* ----- Delete Button ----- 
-
-const deleteButtons = page.querySelectorAll(".elements__delete-button");
-
-deleteButtons.forEach((btn) => {
-  btn.addEventListener("click", function () {
-    const placeCard = btn.closest(".elements__item");
-    placeCard.remove();
-  });
-});
 
 /* ----- Popup Image: Open/Close Function ----- */
 
 const popupImage = page.querySelector("#popup-image");
 
-function popupImageOpen(evt) {
+function openPopupImage(evt) {
   const cardImg = evt.target;
   const popupImg = popupImage.querySelector(".popup__image");
   const popupSubtitle = popupImage.querySelector(".popup__subtitle");
@@ -163,13 +152,13 @@ function popupImageOpen(evt) {
 const cardsImages = page.querySelectorAll(".elements__image");
 
 cardsImages.forEach(function (img) {
-  img.addEventListener("click", popupImageOpen);
+  img.addEventListener("click", openPopupImage);
 });
 
-function popupImageClose() {
+function closePopupImage() {
   popupImage.classList.remove("popup_opened");
 }
 
 const popupImageCloseButton = popupImage.querySelector(".popup__close-button");
 
-popupImageCloseButton.addEventListener("click", popupImageClose);
+popupImageCloseButton.addEventListener("click", closePopupImage);
