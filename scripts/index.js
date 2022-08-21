@@ -66,12 +66,12 @@ function closePopup(popup) {
   popup.classList.remove("popup_opened");
 }
 
-/* ----- Popup Edit: Open/Close Function ----- */
+/* ----- Popup Edit Profile ----- */
 
 const popupEdit = page.querySelector("#popup-edit");
 
-const nameInput = page.querySelector("#popup-edit-name");
-const occupationInput = page.querySelector("#popup-edit-occupation");
+const nameInput = popupEdit.querySelector("#popup-edit-name");
+const occupationInput = popupEdit.querySelector("#popup-edit-occupation");
 
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
@@ -90,9 +90,7 @@ popupEditCloseButton.addEventListener("click", () => {
   closePopup(popupEdit);
 });
 
-/* ----- Popup Edit: Edit Profile Function ----- */
-
-const editFormElement = popupEdit.querySelector(".popup__container");
+const editFormElement = popupEdit.querySelector(".popup__form");
 
 function editFormSubmitHandler(evt) {
   evt.preventDefault();
@@ -105,7 +103,7 @@ function editFormSubmitHandler(evt) {
 
 editFormElement.addEventListener("submit", editFormSubmitHandler);
 
-/* ----- Popup Add Post: Open/Close Function ----- */
+/* ----- Popup Add Post ----- */
 
 const popupAddPost = page.querySelector("#popup-add-post");
 
@@ -124,12 +122,10 @@ popupAddPostCloseButton.addEventListener("click", () => {
   closePopup(popupAddPost);
 });
 
-/* ----- Popup Add Post: Add Post Function ----- */
-
 const placeNameInput = popupAddPost.querySelector("#popup-place-name");
 const placeLinkInput = popupAddPost.querySelector("#popup-place-link");
 
-const addFormElement = popupAddPost.querySelector(".popup__container");
+const addFormElement = popupAddPost.querySelector(".popup__form");
 
 function addFormSubmitHandler(evt) {
   evt.preventDefault();
@@ -148,7 +144,7 @@ function addFormSubmitHandler(evt) {
 
 addFormElement.addEventListener("submit", addFormSubmitHandler);
 
-/* ----- Popup Image: Open/Close Function ----- */
+/* ----- Popup Image ----- */
 
 const popupImage = page.querySelector("#popup-image");
 
