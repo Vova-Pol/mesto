@@ -15,6 +15,15 @@ function cloneCardTemplate() {
     likeButton.classList.toggle("elements__like-button_active");
   });
 
+  const deleteButton = placeCardElement.querySelector(
+    ".elements__delete-button"
+  );
+
+  deleteButton.addEventListener("click", () => {
+    const placeCard = deleteButton.closest(".elements__item");
+    placeCard.remove();
+  });
+
   return placeCardElement;
 }
 
@@ -124,17 +133,7 @@ function addFormSubmitHandler(evt) {
 
 addFormElement.addEventListener("submit", addFormSubmitHandler);
 
-/* ----- Like Button ----- 
-
-const likeButtons = page.querySelectorAll(".elements__like-button");
-
-likeButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    btn.classList.toggle("elements__like-button_active");
-  });
-});
-
-/* ----- Delete Button ----- */
+/* ----- Delete Button ----- 
 
 const deleteButtons = page.querySelectorAll(".elements__delete-button");
 
