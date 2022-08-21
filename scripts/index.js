@@ -4,11 +4,17 @@ const placeCardTemplate = page.querySelector("#place-card").content;
 
 const cardsList = page.querySelector(".elements__list");
 
+function cloneCardTemplate() {
+  const placeCardElement = placeCardTemplate
+    .querySelector(".elements__item")
+    .cloneNode(true);
+
+  return placeCardElement;
+}
+
 function addCardsFromBox(cards) {
   for (let i = 0; i < cards.length; i++) {
-    let placeCardElement = placeCardTemplate
-      .querySelector(".elements__item")
-      .cloneNode(true);
+    const placeCardElement = cloneCardTemplate();
 
     placeCardElement.querySelector(".elements__image").src =
       cardsFromBox[i].link;
@@ -99,9 +105,7 @@ const addFormElement = popupAddPost.querySelector(".popup__container");
 function addFormSubmitHandler(evt) {
   evt.preventDefault();
 
-  let placeCardElement = placeCardTemplate
-    .querySelector(".elements__item")
-    .cloneNode(true);
+  const placeCardElement = cloneCardTemplate();
 
   placeCardElement.querySelector(".elements__image").src = placeLinkInput.value;
   placeCardElement.querySelector(".elements__image").alt = placeNameInput.value;
