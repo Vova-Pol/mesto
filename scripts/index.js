@@ -9,6 +9,12 @@ function cloneCardTemplate() {
     .querySelector(".elements__item")
     .cloneNode(true);
 
+  const likeButton = placeCardElement.querySelector(".elements__like-button");
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("elements__like-button_active");
+  });
+
   return placeCardElement;
 }
 
@@ -118,7 +124,7 @@ function addFormSubmitHandler(evt) {
 
 addFormElement.addEventListener("submit", addFormSubmitHandler);
 
-/* ----- Like Button ----- */
+/* ----- Like Button ----- 
 
 const likeButtons = page.querySelectorAll(".elements__like-button");
 
