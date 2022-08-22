@@ -4,7 +4,7 @@ const placeCardTemplate = page.querySelector("#place-card").content;
 
 const cardsList = page.querySelector(".elements__list");
 
-function cloneCardTemplate() {
+function cloneCardTemplate(imgLink, imgName) {
   const placeCardElement = placeCardTemplate
     .querySelector(".elements__item")
     .cloneNode(true);
@@ -25,6 +25,11 @@ function cloneCardTemplate() {
   });
 
   const cardImage = placeCardElement.querySelector(".elements__image");
+  const cardTitle = placeCardElement.querySelector(".elements__title");
+
+  cardImage.src = imgLink;
+  cardImage.alt = imgName;
+  cardTitle.textContent = imgName;
 
   cardImage.addEventListener("click", (evt) => {
     const cardImg = evt.target;
@@ -39,14 +44,7 @@ function cloneCardTemplate() {
 
 function addCardsFromBox(cards) {
   for (let i = 0; i < cards.length; i++) {
-    const placeCardElement = cloneCardTemplate();
-
-    placeCardElement.querySelector(".elements__image").src =
-      cardsFromBox[i].link;
-    placeCardElement.querySelector(".elements__image").alt =
-      cardsFromBox[i].name;
-    placeCardElement.querySelector(".elements__title").textContent =
-      cardsFromBox[i].name;
+    const placeCardElement = cloneCardTemplate(cards[i].link, cards[i].name);
 
     cardsList.prepend(placeCardElement);
   }
@@ -130,13 +128,10 @@ const addFormElement = popupAddPost.querySelector(".popup__form");
 function addFormSubmitHandler(evt) {
   evt.preventDefault();
 
-  const placeCardElement = cloneCardTemplate();
-  const cardImage = placeCardElement.querySelector(".elements__image");
-  const cardTitle = placeCardElement.querySelector(".elements__title");
-
-  cardImage.src = placeLinkInput.value;
-  cardImage.alt = placeNameInput.value;
-  cardTitle.textContent = placeNameInput.value;
+  const placeCardElement = cloneCardTemplate(
+    placeLinkInput.value,
+    placeNameInput.value
+  );
 
   cardsList.prepend(placeCardElement);
   closePopup(popupAddPost);
@@ -150,8 +145,6 @@ const popupImage = page.querySelector("#popup-image");
 
 const popupImg = popupImage.querySelector(".popup__image");
 const popupSubtitle = popupImage.querySelector(".popup__subtitle");
-
-const cardsImages = page.querySelectorAll(".elements__image");
 
 const popupImageCloseButton = popupImage.querySelector(".popup__close-button");
 
