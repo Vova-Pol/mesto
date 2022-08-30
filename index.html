@@ -85,22 +85,28 @@
       </div>
 
       <div class="popup" id="popup-add-post">
-        <form class="popup__form" name="add-post-form" id="add-post-form">
+        <form class="popup__form" name="AddPostForm" novalidate>
           <h3 class="popup__title">Новое место</h3>
           <input
             type="text"
-            placeholder="Название"
-            name="place-name"
+            placeholder="Название места"
+            name="placeNameInput"
             class="popup__input"
-            id="popup-place-name"
+            id="place-name-input"
+            required
+            minlength="2"
+            maxlength="30"
           />
+          <span class="popup__input-error" id="place-name-input-error"></span>
           <input
-            type="text"
+            type="url"
             placeholder="Ссылка на картинку"
-            name="place-link"
+            name="placeLinkInput"
             class="popup__input"
-            id="popup-place-link"
+            id="place-link-input"
+            required
           />
+          <span class="popup__input-error" id="place-link-input-error"></span>
           <button class="popup__save-button" type="submit">Создать</button>
           <button class="popup__close-button" type="button"></button>
         </form>

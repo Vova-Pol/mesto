@@ -108,7 +108,7 @@ const popupAddPost = page.querySelector("#popup-add-post");
 const addPostButton = page.querySelector(".profile__add-button");
 
 addPostButton.addEventListener("click", () => {
-  popupAddPost.querySelector("#add-post-form").reset();
+  popupAddPost.querySelector("form").reset();
   openPopup(popupAddPost);
 });
 
@@ -120,8 +120,8 @@ popupAddPostCloseButton.addEventListener("click", () => {
   closePopup(popupAddPost);
 });
 
-const placeNameInput = popupAddPost.querySelector("#popup-place-name");
-const placeLinkInput = popupAddPost.querySelector("#popup-place-link");
+const placeNameInput = popupAddPost.querySelector("#place-name-input");
+const placeLinkInput = popupAddPost.querySelector("#place-link-input");
 
 const addFormElement = popupAddPost.querySelector(".popup__form");
 
@@ -153,9 +153,6 @@ popupImageCloseButton.addEventListener("click", () => {
 });
 
 /* ----- Edit Profile Form Validation ----- */
-
-const profileNameInput = editProfileForm.profileNameInput;
-const profileOccupationInput = editProfileForm.profileOccupationInput;
 
 function showInputError(inputElem, formElem) {
   inputElem.classList.add("popup__input_type_error");
