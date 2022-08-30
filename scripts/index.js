@@ -186,4 +186,11 @@ function setEventListenersForInputs(formElem) {
   });
 }
 
-setEventListenersForInputs(editProfileForm);
+function validateAllForms() {
+  const formsList = Array.from(document.forms);
+  formsList.forEach((formElem) => {
+    setEventListenersForInputs(formElem);
+  });
+}
+
+validateAllForms();
