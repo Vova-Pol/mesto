@@ -157,30 +157,33 @@ popupImageCloseButton.addEventListener("click", () => {
 const profileNameInput = editProfileForm.profileNameInput;
 const profileOccupationInput = editProfileForm.profileOccupationInput;
 
-const profileInputList = editProfileForm.querySelectorAll("input");
-
-function showInputError(inputElem) {
+function showInputError(inputElem, formElem) {
   inputElem.classList.add("popup__input_type_error");
-  const errorElement = editProfileForm.querySelector(`#${inputElem.id}-error`);
+  const errorElement = formElem.querySelector(`#${inputElem.id}-error`);
   errorElement.textContent = inputElem.validationMessage;
 }
 
-function hideInputError(inputElem) {
+function hideInputError(inputElem, formElem) {
   inputElem.classList.remove("popup__input_type_error");
-  const errorElement = editProfileForm.querySelector(`#${inputElem.id}-error`);
+  const errorElement = formElem.querySelector(`#${inputElem.id}-error`);
   errorElement.textContent = "";
 }
 
-function isInputValid(inputElem) {
+function isInputValid(inputElem, formElem) {
   if (inputElem.validity.valid) {
-    hideInputError(inputElem);
+    hideInputError(inputElem, formElem);
   } else {
-    showInputError(inputElem);
+    showInputError(inputElem, formElem);
   }
 }
 
-profileInputList.forEach((inputElem) => {
-  inputElem.addEventListener("input", () => {
-    isInputValid(inputElem);
+function setEventListenersForInputs(formElem) {
+  const inputsList = formElem.querySelectorAll("input");
+  inputsList.forEach((inputElem) => {
+    inputElem.addEventListener("input", () => {
+      isInputValid(inputElem, formElem);
+    });
   });
-});
+}
+
+setEventListenersForInputs(editProfileForm);
