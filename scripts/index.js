@@ -88,9 +88,9 @@ popupEditCloseButton.addEventListener("click", () => {
   closePopup(popupEdit);
 });
 
-const editFormElement = popupEdit.querySelector(".popup__form");
+const editProfileForm = document.forms.editProfileForm;
 
-function editFormSubmitHandler(evt) {
+function editProfileFormSubmitHandler(evt) {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -99,7 +99,7 @@ function editFormSubmitHandler(evt) {
   closePopup(popupEdit);
 }
 
-editFormElement.addEventListener("submit", editFormSubmitHandler);
+editProfileForm.addEventListener("submit", editProfileFormSubmitHandler);
 
 /* ----- Popup Add Post ----- */
 
@@ -150,4 +150,33 @@ const popupImageCloseButton = popupImage.querySelector(".popup__close-button");
 
 popupImageCloseButton.addEventListener("click", () => {
   closePopup(popupImage);
+});
+
+/* ----- Edit Profile Form Validation ----- */
+
+const profileNameInput = editProfileForm.profileNameInput;
+const profileOccupationInput = editProfileForm.profileOccupationInput;
+
+const profileInputList = editProfileForm.querySelectorAll("input");
+
+function showInputError(inputElem) {
+  inputElem.classList.add("popup__input_type_error");
+}
+
+function hideInputError(inputElem) {
+  inputElem.classList.remove("popup__input_type_error");
+}
+
+function isInputValid(inputElem) {
+  if (inputElem.validity.valid) {
+    hideInputError(inputElem);
+  } else {
+    showInputError(inputElem);
+  }
+}
+
+profileInputList.forEach((inputElem) => {
+  inputElem.addEventListener("input", () => {
+    isInputValid(inputElem);
+  });
 });

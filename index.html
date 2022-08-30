@@ -52,21 +52,27 @@
       </footer>
 
       <div class="popup" id="popup-edit">
-        <form class="popup__form" name="edit-profile-form">
+        <form class="popup__form" name="editProfileForm">
           <h3 class="popup__title">Редактировать профиль</h3>
           <input
             type="text"
             placeholder="Имя"
-            name="name"
+            name="profileNameInput"
             class="popup__input"
             id="popup-edit-name"
+            required
+            minlength="2"
+            maxlength="40"
           />
           <input
             type="text"
             placeholder="Род деятельности"
-            name="occupation"
+            name="profileOccupationInput"
             class="popup__input"
             id="popup-edit-occupation"
+            required
+            minlength="2"
+            maxlength="200"
           />
           <button class="popup__save-button" type="submit">Сохранить</button>
           <button class="popup__close-button" type="button"></button>
