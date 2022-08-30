@@ -59,21 +59,26 @@
             placeholder="Имя"
             name="profileNameInput"
             class="popup__input"
-            id="popup-edit-name"
+            id="profile-name-input"
             required
             minlength="2"
             maxlength="40"
           />
+          <span class="popup__input-error" id="profile-name-input-error"></span>
           <input
             type="text"
             placeholder="Род деятельности"
             name="profileOccupationInput"
             class="popup__input"
-            id="popup-edit-occupation"
+            id="profile-occupation-input"
             required
             minlength="2"
             maxlength="200"
           />
+          <span
+            class="popup__input-error"
+            id="profile-occupation-input-error"
+          ></span>
           <button class="popup__save-button" type="submit">Сохранить</button>
           <button class="popup__close-button" type="button"></button>
         </form>

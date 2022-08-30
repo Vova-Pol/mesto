@@ -68,8 +68,8 @@ function closePopup(popup) {
 
 const popupEdit = page.querySelector("#popup-edit");
 
-const nameInput = popupEdit.querySelector("#popup-edit-name");
-const occupationInput = popupEdit.querySelector("#popup-edit-occupation");
+const nameInput = popupEdit.querySelector("#profile-name-input");
+const occupationInput = popupEdit.querySelector("#profile-occupation-input");
 
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
@@ -161,10 +161,14 @@ const profileInputList = editProfileForm.querySelectorAll("input");
 
 function showInputError(inputElem) {
   inputElem.classList.add("popup__input_type_error");
+  const errorElement = editProfileForm.querySelector(`#${inputElem.id}-error`);
+  errorElement.textContent = inputElem.validationMessage;
 }
 
 function hideInputError(inputElem) {
   inputElem.classList.remove("popup__input_type_error");
+  const errorElement = editProfileForm.querySelector(`#${inputElem.id}-error`);
+  errorElement.textContent = "";
 }
 
 function isInputValid(inputElem) {
