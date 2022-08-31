@@ -115,9 +115,17 @@ const popupAddPost = page.querySelector("#popup-add-post");
 
 const addPostButton = page.querySelector(".profile__add-button");
 
+const popupAddPostInputsList = Array.from(
+  popupAddPost.querySelectorAll("input")
+);
+const popupAddPostSubmitButton = popupAddPost.querySelector(
+  ".popup__save-button"
+);
+
 addPostButton.addEventListener("click", () => {
   popupAddPost.querySelector("form").reset();
   openPopup(popupAddPost);
+  toggleSubmitButtonState(popupAddPostInputsList, popupAddPostSubmitButton);
 });
 
 const popupAddPostCloseButton = popupAddPost.querySelector(
