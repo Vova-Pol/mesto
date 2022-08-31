@@ -85,8 +85,8 @@ editButton.addEventListener("click", () => {
   occupationInput.value = profileOccupation.textContent;
   openPopup(popupEdit);
   toggleSubmitButtonState(popupEditInputsList, popupEditSubmitButton);
-  popupEditInputsList.forEach((input) => {
-    isInputValid(input, popupEditForm);
+  popupEditInputsList.forEach((inputElem) => {
+    isInputValid(inputElem, popupEditForm);
   });
 });
 
@@ -121,11 +121,15 @@ const popupAddPostInputsList = Array.from(
 const popupAddPostSubmitButton = popupAddPost.querySelector(
   ".popup__save-button"
 );
+const popupAddPostForm = popupAddPost.querySelector("form");
 
 addPostButton.addEventListener("click", () => {
   popupAddPost.querySelector("form").reset();
   openPopup(popupAddPost);
   toggleSubmitButtonState(popupAddPostInputsList, popupAddPostSubmitButton);
+  popupAddPostInputsList.forEach((inputElem) => {
+    hideInputError(inputElem, popupAddPostForm);
+  });
 });
 
 const popupAddPostCloseButton = popupAddPost.querySelector(
