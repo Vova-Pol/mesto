@@ -230,3 +230,25 @@ function toggleSubmitButtonState(inputsList, buttonElem) {
     buttonElem.removeAttribute("disabled");
   }
 }
+
+/* ----- Overlay Close Popup ----- */
+
+const popupsList = Array.from(page.querySelectorAll(".popup"));
+
+popupsList.forEach((popup) => {
+  popup.addEventListener("click", (evt) => {
+    closePopupByOverlay(popup, evt);
+  });
+});
+
+function closePopupByOverlay(popup, evt) {
+  const popupForm = popup.querySelector("form");
+  const formElements = Array.from(popupForm.childNodes);
+
+  const clickOnForm = popupForm === evt.target;
+  const clickOnFormElement = formElements.some((el) => el === evt.target);
+
+  if (!clickOnForm && !clickOnFormElement) {
+    closePopup(popup);
+  }
+}
