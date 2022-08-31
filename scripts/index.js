@@ -175,10 +175,15 @@ function isInputValid(inputElem, formElem) {
 }
 
 function setEventListenersForInputs(formElem) {
-  const inputsList = formElem.querySelectorAll("input");
+  const inputsList = Array.from(formElem.querySelectorAll("input"));
+  const buttonElem = formElem.querySelector(".popup__save-button");
+
+  toggleSubmitButtonState(inputsList, buttonElem);
+
   inputsList.forEach((inputElem) => {
     inputElem.addEventListener("input", () => {
       isInputValid(inputElem, formElem);
+      toggleSubmitButtonState(inputsList, buttonElem);
     });
   });
 }
@@ -191,3 +196,17 @@ function validateAllForms() {
 }
 
 validateAllForms();
+
+/* ----- Submit Button ----- */
+
+function hasInvalidInput(inputsList) {
+  return inputsList.some((input) => !input.validity.valid);
+}
+
+function toggleSubmitButtonState(inputsList, buttonElem) {
+  if (hasInvalidInput(inputsList)) {
+    buttonElem.setAttribute("disabled", "disabled");
+  } else {
+    buttonElem.removeAttribute("disabled");
+  }
+}
