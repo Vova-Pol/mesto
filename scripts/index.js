@@ -252,3 +252,14 @@ function closePopupByOverlay(popup, evt) {
     closePopup(popup);
   }
 }
+
+/* ----- Esc Button Close Popup ----- */
+
+page.addEventListener("keydown", (evt) => {
+  const openedPopup = popupsList.find((popup) =>
+    popup.classList.contains("popup_opened")
+  );
+  if (evt.key === "Escape") {
+    closePopup(openedPopup);
+  }
+});
