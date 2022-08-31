@@ -76,10 +76,18 @@ const profileOccupation = page.querySelector(".profile__occupation");
 
 const editButton = page.querySelector(".profile__edit-button");
 
+const popupEditInputsList = Array.from(popupEdit.querySelectorAll("input"));
+const popupEditSubmitButton = popupEdit.querySelector(".popup__save-button");
+const popupEditForm = popupEdit.querySelector("form");
+
 editButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   occupationInput.value = profileOccupation.textContent;
   openPopup(popupEdit);
+  toggleSubmitButtonState(popupEditInputsList, popupEditSubmitButton);
+  popupEditInputsList.forEach((input) => {
+    isInputValid(input, popupEditForm);
+  });
 });
 
 const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
