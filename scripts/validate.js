@@ -1,13 +1,20 @@
-/* ----- All Forms Validation ----- */
+/* ----- Forms Validation Func ----- */
+
+const elementsSelectors = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save-button",
+  inputErrorClass: "popup__input_type_error",
+};
 
 function showInputError(inputElem, formElem) {
-  inputElem.classList.add("popup__input_type_error");
+  inputElem.classList.add(elementsSelectors.inputErrorClass);
   const errorElement = formElem.querySelector(`#${inputElem.id}-error`);
   errorElement.textContent = inputElem.validationMessage;
 }
 
 function hideInputError(inputElem, formElem) {
-  inputElem.classList.remove("popup__input_type_error");
+  inputElem.classList.remove(elementsSelectors.inputErrorClass);
   const errorElement = formElem.querySelector(`#${inputElem.id}-error`);
   errorElement.textContent = "";
 }
@@ -21,8 +28,12 @@ function isInputValid(inputElem, formElem) {
 }
 
 function setEventListenersForInputs(formElem) {
-  const inputsList = Array.from(formElem.querySelectorAll("input"));
-  const buttonElem = formElem.querySelector(".popup__save-button");
+  const inputsList = Array.from(
+    formElem.querySelectorAll(elementsSelectors.inputSelector)
+  );
+  const buttonElem = formElem.querySelector(
+    elementsSelectors.submitButtonSelector
+  );
 
   toggleSubmitButtonState(inputsList, buttonElem);
 
@@ -34,16 +45,18 @@ function setEventListenersForInputs(formElem) {
   });
 }
 
-function validateAllForms() {
-  const formsList = Array.from(document.forms);
+function validateAllForms(elementsSelectors) {
+  const formsList = Array.from(
+    document.querySelectorAll(elementsSelectors.formSelector)
+  );
   formsList.forEach((formElem) => {
     setEventListenersForInputs(formElem);
   });
 }
 
-validateAllForms();
+validateAllForms(elementsSelectors);
 
-/* ----- Submit Button ----- */
+/* ----- Submit Button State Func ----- */
 
 function hasInvalidInput(inputsList) {
   return inputsList.some((input) => !input.validity.valid);
