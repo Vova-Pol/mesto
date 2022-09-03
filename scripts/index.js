@@ -95,7 +95,7 @@ popupEditCloseButton.addEventListener("click", () => {
 
 const editProfileForm = document.forms.editProfileForm;
 
-function editProfileFormSubmitHandler(evt) {
+function handleEditProfileFormSubmit(evt) {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -104,7 +104,7 @@ function editProfileFormSubmitHandler(evt) {
   closePopup(popupEdit);
 }
 
-editProfileForm.addEventListener("submit", editProfileFormSubmitHandler);
+editProfileForm.addEventListener("submit", handleEditProfileFormSubmit);
 
 /* ----- Popup Add Post ----- */
 
@@ -143,7 +143,7 @@ const placeLinkInput = popupAddPost.querySelector("#place-link-input");
 
 const addFormElement = popupAddPost.querySelector(".popup__form");
 
-function addFormSubmitHandler(evt) {
+function handleAddPostFormSubmit(evt) {
   evt.preventDefault();
 
   const placeCardData = {
@@ -156,7 +156,7 @@ function addFormSubmitHandler(evt) {
   closePopup(popupAddPost);
 }
 
-addFormElement.addEventListener("submit", addFormSubmitHandler);
+addFormElement.addEventListener("submit", handleAddPostFormSubmit);
 
 /* ----- Popup Image ----- */
 
