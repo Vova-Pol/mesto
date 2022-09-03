@@ -23,8 +23,7 @@ function cloneCardTemplate(cardData) {
   );
 
   deleteButton.addEventListener("click", () => {
-    const placeCard = deleteButton.closest(".elements__item");
-    placeCard.remove();
+    placeCardElement.remove();
   });
 
   const cardImage = placeCardElement.querySelector(".elements__image");
@@ -34,11 +33,10 @@ function cloneCardTemplate(cardData) {
   cardImage.alt = cardData.name;
   cardTitle.textContent = cardData.name;
 
-  cardImage.addEventListener("click", (evt) => {
-    const cardImg = evt.target;
-    popupImg.src = cardImg.src;
-    popupImg.alt = cardImg.alt;
-    popupSubtitle.textContent = cardImg.alt;
+  cardImage.addEventListener("click", () => {
+    popupImg.src = cardData.link;
+    popupImg.alt = cardData.name;
+    popupSubtitle.textContent = cardData.name;
     openPopup(popupImage);
   });
 
@@ -46,11 +44,10 @@ function cloneCardTemplate(cardData) {
 }
 
 function addCardsFromBox(cards) {
-  for (let i = 0; i < cards.length; i++) {
-    const placeCardElement = cloneCardTemplate(cards[i]);
-
+  cards.forEach((card) => {
+    const placeCardElement = cloneCardTemplate(card);
     cardsContainer.prepend(placeCardElement);
-  }
+  });
 }
 
 addCardsFromBox(cardsFromBox);
