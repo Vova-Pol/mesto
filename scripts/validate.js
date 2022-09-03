@@ -69,3 +69,12 @@ function toggleSubmitButtonState(inputsList, buttonElem) {
     buttonElem.removeAttribute("disabled");
   }
 }
+
+/** Reset input validation and toggle Submit button state */
+
+function resetValidation(inputsList, buttonElem, popupForm) {
+  toggleSubmitButtonState(inputsList, buttonElem);
+  inputsList.forEach((inputElem) => {
+    hideInputError(inputElem, popupForm);
+  });
+}

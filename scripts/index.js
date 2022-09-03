@@ -84,10 +84,7 @@ editButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   occupationInput.value = profileOccupation.textContent;
   openPopup(popupEdit);
-  toggleSubmitButtonState(popupEditInputsList, popupEditSubmitButton);
-  popupEditInputsList.forEach((inputElem) => {
-    isInputValid(inputElem, popupEditForm);
-  });
+  resetValidation(popupEditInputsList, popupEditSubmitButton, popupEditForm);
 });
 
 const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
@@ -126,10 +123,11 @@ const popupAddPostForm = popupAddPost.querySelector("form");
 addPostButton.addEventListener("click", () => {
   popupAddPost.querySelector("form").reset();
   openPopup(popupAddPost);
-  toggleSubmitButtonState(popupAddPostInputsList, popupAddPostSubmitButton);
-  popupAddPostInputsList.forEach((inputElem) => {
-    hideInputError(inputElem, popupAddPostForm);
-  });
+  resetValidation(
+    popupAddPostInputsList,
+    popupAddPostSubmitButton,
+    popupAddPostForm
+  );
 });
 
 const popupAddPostCloseButton = popupAddPost.querySelector(
