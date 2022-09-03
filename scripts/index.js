@@ -1,13 +1,12 @@
 const page = document.querySelector(".page");
 
-const placeCardTemplate = page.querySelector("#place-card").content;
+const placeCardTemplateContent = page.querySelector("#place-card").content;
+const placeCardTemplate =
+  placeCardTemplateContent.querySelector(".elements__item");
+const cardsContainer = page.querySelector(".elements__list");
 
-const cardsList = page.querySelector(".elements__list");
-
-function cloneCardTemplate(imgLink, imgName) {
-  const placeCardElement = placeCardTemplate
-    .querySelector(".elements__item")
-    .cloneNode(true);
+function cloneCardTemplate(cardData) {
+  const placeCardElement = placeCardTemplate.cloneNode(true);
 
   const likeButton = placeCardElement.querySelector(".elements__like-button");
 
@@ -27,9 +26,9 @@ function cloneCardTemplate(imgLink, imgName) {
   const cardImage = placeCardElement.querySelector(".elements__image");
   const cardTitle = placeCardElement.querySelector(".elements__title");
 
-  cardImage.src = imgLink;
-  cardImage.alt = imgName;
-  cardTitle.textContent = imgName;
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
+  cardTitle.textContent = cardData.name;
 
   cardImage.addEventListener("click", (evt) => {
     const cardImg = evt.target;
@@ -44,9 +43,9 @@ function cloneCardTemplate(imgLink, imgName) {
 
 function addCardsFromBox(cards) {
   for (let i = 0; i < cards.length; i++) {
-    const placeCardElement = cloneCardTemplate(cards[i].link, cards[i].name);
+    const placeCardElement = cloneCardTemplate(cards[i]);
 
-    cardsList.prepend(placeCardElement);
+    cardsContainer.prepend(placeCardElement);
   }
 }
 
@@ -148,12 +147,13 @@ const addFormElement = popupAddPost.querySelector(".popup__form");
 function addFormSubmitHandler(evt) {
   evt.preventDefault();
 
-  const placeCardElement = cloneCardTemplate(
-    placeLinkInput.value,
-    placeNameInput.value
-  );
+  const placeCardData = {
+    name: placeNameInput.value,
+    link: placeLinkInput.value,
+  };
+  const placeCardElement = cloneCardTemplate(placeCardData);
 
-  cardsList.prepend(placeCardElement);
+  cardsContainer.prepend(placeCardElement);
   closePopup(popupAddPost);
 }
 
