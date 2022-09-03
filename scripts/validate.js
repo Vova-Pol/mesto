@@ -1,6 +1,6 @@
 /* ----- Forms Validation Func ----- */
 
-const elementsSelectors = {
+const validationConfig = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__save-button",
@@ -8,18 +8,18 @@ const elementsSelectors = {
 };
 
 function showInputError(inputElem, formElem) {
-  inputElem.classList.add(elementsSelectors.inputErrorClass);
+  inputElem.classList.add(validationConfig.inputErrorClass);
   const errorElement = formElem.querySelector(`#${inputElem.id}-error`);
   errorElement.textContent = inputElem.validationMessage;
 }
 
 function hideInputError(inputElem, formElem) {
-  inputElem.classList.remove(elementsSelectors.inputErrorClass);
+  inputElem.classList.remove(validationConfig.inputErrorClass);
   const errorElement = formElem.querySelector(`#${inputElem.id}-error`);
   errorElement.textContent = "";
 }
 
-function isInputValid(inputElem, formElem) {
+function checkIsInputValid(inputElem, formElem) {
   if (inputElem.validity.valid) {
     hideInputError(inputElem, formElem);
   } else {
@@ -29,32 +29,32 @@ function isInputValid(inputElem, formElem) {
 
 function setEventListenersForInputs(formElem) {
   const inputsList = Array.from(
-    formElem.querySelectorAll(elementsSelectors.inputSelector)
+    formElem.querySelectorAll(validationConfig.inputSelector)
   );
   const buttonElem = formElem.querySelector(
-    elementsSelectors.submitButtonSelector
+    validationConfig.submitButtonSelector
   );
 
   toggleSubmitButtonState(inputsList, buttonElem);
 
   inputsList.forEach((inputElem) => {
     inputElem.addEventListener("input", () => {
-      isInputValid(inputElem, formElem);
+      checkIsInputValid(inputElem, formElem);
       toggleSubmitButtonState(inputsList, buttonElem);
     });
   });
 }
 
-function validateAllForms(elementsSelectors) {
+function enableValidation(validationConfig) {
   const formsList = Array.from(
-    document.querySelectorAll(elementsSelectors.formSelector)
+    document.querySelectorAll(validationConfig.formSelector)
   );
   formsList.forEach((formElem) => {
     setEventListenersForInputs(formElem);
   });
 }
 
-validateAllForms(elementsSelectors);
+enableValidation(validationConfig);
 
 /* ----- Submit Button State Func ----- */
 
