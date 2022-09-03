@@ -121,7 +121,7 @@ const popupAddPostSubmitButton = popupAddPost.querySelector(
 const popupAddPostForm = popupAddPost.querySelector("form");
 
 addPostButton.addEventListener("click", () => {
-  popupAddPost.querySelector("form").reset();
+  popupAddPostForm.reset();
   openPopup(popupAddPost);
   resetValidation(
     popupAddPostInputsList,
@@ -177,18 +177,12 @@ const popupsList = Array.from(page.querySelectorAll(".popup"));
 
 popupsList.forEach((popup) => {
   popup.addEventListener("click", (evt) => {
-    closePopupByOverlay(popup, evt);
+    handleClosePopupByOverlay(popup, evt);
   });
 });
 
-function closePopupByOverlay(popup, evt) {
-  const popupForm = popup.querySelector("form");
-  const formElements = Array.from(popupForm.childNodes);
-
-  const clickOnForm = popupForm === evt.target;
-  const clickOnFormElement = formElements.some((el) => el === evt.target);
-
-  if (!clickOnForm && !clickOnFormElement) {
+function handleClosePopupByOverlay(popup, evt) {
+  if (evt.target === evt.currentTarget) {
     closePopup(popup);
   }
 }
