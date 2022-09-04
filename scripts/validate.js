@@ -7,27 +7,27 @@ const validationConfig = {
   inputErrorClass: "popup__input_type_error",
 };
 
-function showInputError(inputElem, formElem) {
+function showInputError(inputElem, formElem, validationConfig) {
   inputElem.classList.add(validationConfig.inputErrorClass);
   const errorElement = formElem.querySelector(`#${inputElem.id}-error`);
   errorElement.textContent = inputElem.validationMessage;
 }
 
-function hideInputError(inputElem, formElem) {
+function hideInputError(inputElem, formElem, validationConfig) {
   inputElem.classList.remove(validationConfig.inputErrorClass);
   const errorElement = formElem.querySelector(`#${inputElem.id}-error`);
   errorElement.textContent = "";
 }
 
-function checkIsInputValid(inputElem, formElem) {
+function checkIsInputValid(inputElem, formElem, validationConfig) {
   if (inputElem.validity.valid) {
-    hideInputError(inputElem, formElem);
+    hideInputError(inputElem, formElem, validationConfig);
   } else {
-    showInputError(inputElem, formElem);
+    showInputError(inputElem, formElem, validationConfig);
   }
 }
 
-function setEventListenersForInputs(formElem) {
+function setEventListenersForInputs(formElem, validationConfig) {
   const inputsList = Array.from(
     formElem.querySelectorAll(validationConfig.inputSelector)
   );
@@ -39,7 +39,7 @@ function setEventListenersForInputs(formElem) {
 
   inputsList.forEach((inputElem) => {
     inputElem.addEventListener("input", () => {
-      checkIsInputValid(inputElem, formElem);
+      checkIsInputValid(inputElem, formElem, validationConfig);
       toggleSubmitButtonState(inputsList, buttonElem);
     });
   });
@@ -50,7 +50,7 @@ function enableValidation(validationConfig) {
     document.querySelectorAll(validationConfig.formSelector)
   );
   formsList.forEach((formElem) => {
-    setEventListenersForInputs(formElem);
+    setEventListenersForInputs(formElem, validationConfig);
   });
 }
 
@@ -72,9 +72,9 @@ function toggleSubmitButtonState(inputsList, buttonElem) {
 
 /** Reset input validation and toggle Submit button state */
 
-function resetValidation(inputsList, buttonElem, popupForm) {
+function resetValidation(inputsList, buttonElem, popupForm, validationConfig) {
   toggleSubmitButtonState(inputsList, buttonElem);
   inputsList.forEach((inputElem) => {
-    hideInputError(inputElem, popupForm);
+    hideInputError(inputElem, popupForm, validationConfig);
   });
 }

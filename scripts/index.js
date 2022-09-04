@@ -95,7 +95,12 @@ editButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   occupationInput.value = profileOccupation.textContent;
   openPopup(popupEdit);
-  resetValidation(popupEditInputsList, popupEditSubmitButton, popupEditForm);
+  resetValidation(
+    popupEditInputsList,
+    popupEditSubmitButton,
+    popupEditForm,
+    validationConfig
+  );
 });
 
 const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
@@ -137,7 +142,8 @@ addPostButton.addEventListener("click", () => {
   resetValidation(
     popupAddPostInputsList,
     popupAddPostSubmitButton,
-    popupAddPostForm
+    popupAddPostForm,
+    validationConfig
   );
 });
 
