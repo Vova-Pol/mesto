@@ -5,8 +5,8 @@ const placeCardTemplate =
   placeCardTemplateContent.querySelector(".elements__item");
 const cardsContainer = page.querySelector(".elements__list");
 
-function buttonStateToggle(evt, className) {
-  evt.target.classList.toggle(className);
+function toggleButtonState(button, className) {
+  button.classList.toggle(className);
 }
 
 function cloneCardTemplate(cardData) {
@@ -14,8 +14,8 @@ function cloneCardTemplate(cardData) {
 
   const likeButton = placeCardElement.querySelector(".elements__like-button");
 
-  likeButton.addEventListener("click", (evt) => {
-    buttonStateToggle(evt, "elements__like-button_active");
+  likeButton.addEventListener("click", () => {
+    toggleButtonState(likeButton, "elements__like-button_active");
   });
 
   const deleteButton = placeCardElement.querySelector(
