@@ -1,6 +1,4 @@
-/* ----- Cards "from the box" ----- */
-
-const cardsFromBox = [
+const cardsData = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
