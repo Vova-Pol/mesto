@@ -1,3 +1,4 @@
+import { cardsData } from "./cards-data.js";
 import { Card } from "./card.js";
 
 const page = document.querySelector(".page");
