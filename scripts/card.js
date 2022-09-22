@@ -31,11 +31,21 @@ export class Card {
       .addEventListener("click", () => {
         this._handleLikeButton();
       });
+
+    this._element
+      .querySelector(".elements__delete-button")
+      .addEventListener("click", () => {
+        this._handleDeleteButton();
+      });
   }
 
   _handleLikeButton() {
     this._element
       .querySelector(".elements__like-button")
       .classList.toggle("elements__like-button_active");
+  }
+
+  _handleDeleteButton() {
+    this._element.remove();
   }
 }
