@@ -56,7 +56,7 @@ function toggleButtonState(button, className) {
 addCardsFromBox(cardsData);*/
 
 cardsData.forEach((elem) => {
-  const card = new Card(elem);
+  const card = new Card(elem, "#place-card");
   const cardElement = card.generateCard();
   cardsContainer.prepend(cardElement);
 });
@@ -176,7 +176,7 @@ function handleAddPostFormSubmit(evt) {
     name: placeNameInput.value,
     link: placeLinkInput.value,
   };
-  const card = new Card(placeCardData);
+  const card = new Card(placeCardData, "#place-card");
   const cardElement = card.generateCard();
 
   cardsContainer.prepend(cardElement);
