@@ -176,9 +176,10 @@ function handleAddPostFormSubmit(evt) {
     name: placeNameInput.value,
     link: placeLinkInput.value,
   };
-  const placeCardElement = cloneCardTemplate(placeCardData);
+  const card = new Card(placeCardData);
+  const cardElement = card.generateCard();
 
-  cardsContainer.prepend(placeCardElement);
+  cardsContainer.prepend(cardElement);
   closePopup(popupAddPost);
 }
 
