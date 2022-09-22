@@ -20,6 +20,22 @@ export class Card {
     this._element.querySelector(".elements__image").alt = this._name;
     this._element.querySelector(".elements__title").textContent = this._name;
 
+    this._setEventListeners();
+
     return this._element;
+  }
+
+  _setEventListeners() {
+    this._element
+      .querySelector(".elements__like-button")
+      .addEventListener("click", () => {
+        this._handleLikeButton();
+      });
+  }
+
+  _handleLikeButton() {
+    this._element
+      .querySelector(".elements__like-button")
+      .classList.toggle("elements__like-button_active");
   }
 }
