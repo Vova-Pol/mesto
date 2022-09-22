@@ -1,3 +1,5 @@
+import { openPopup, popupImage, popupImg, popupSubtitle } from "./index.js";
+
 export class Card {
   constructor(data) {
     this._name = data.name;
@@ -37,6 +39,12 @@ export class Card {
       .addEventListener("click", () => {
         this._handleDeleteButton();
       });
+
+    this._element
+      .querySelector(".elements__image")
+      .addEventListener("click", () => {
+        this._handleImage();
+      });
   }
 
   _handleLikeButton() {
@@ -47,5 +55,12 @@ export class Card {
 
   _handleDeleteButton() {
     this._element.remove();
+  }
+
+  _handleImage() {
+    popupImg.src = this._link;
+    popupImg.alt = this._name;
+    popupSubtitle.textContent = this._name;
+    openPopup(popupImage);
   }
 }

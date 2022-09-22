@@ -212,3 +212,5 @@ function handleClosePopupByOverlay(popup, evt) {
     closePopup(popup);
   }
 }
+
+export { openPopup, popupImage, popupImg, popupSubtitle };
