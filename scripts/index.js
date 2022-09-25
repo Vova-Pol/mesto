@@ -1,5 +1,5 @@
 import { cardsData } from "./cards-data.js";
-import { Card } from "./Card.js";
+import { Card } from "../scripts/Card.js";
 import { FormValidator, validationConfig } from "./FormValidator.js";
 
 const page = document.querySelector(".page");
