@@ -2,6 +2,9 @@ class FormValidator {
   constructor(validationConfig, formElement) {
     this._validationConfig = validationConfig;
     this._formElement = formElement;
+    this._buttonElement = formElement.querySelector(
+      validationConfig.buttonSelector
+    );
   }
 
   _checkIsInputValid(inputElem) {
@@ -34,13 +37,10 @@ class FormValidator {
   }
 
   _toggleSubmitButton() {
-    const buttonElem = this._formElement.querySelector(
-      this._validationConfig.buttonSelector
-    );
     if (this._hasInvalidInput()) {
-      buttonElem.disabled = true;
+      this._buttonElement.disabled = true;
     } else {
-      buttonElem.disabled = false;
+      this._buttonElement.disabled = false;
     }
   }
 
