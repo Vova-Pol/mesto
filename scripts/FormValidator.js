@@ -5,6 +5,7 @@ class FormValidator {
     this._buttonElement = formElement.querySelector(
       validationConfig.buttonSelector
     );
+    this._inputsList = Array.from(formElement.querySelectorAll("input"));
   }
 
   _checkIsInputValid(inputElem) {
@@ -27,8 +28,7 @@ class FormValidator {
   }
 
   _setEventListeners() {
-    const inputsList = Array.from(this._formElement.querySelectorAll("input"));
-    inputsList.forEach((input) => {
+    this._inputsList.forEach((input) => {
       input.addEventListener("input", (evt) => {
         this._checkIsInputValid(evt.currentTarget);
         this._toggleSubmitButton();
@@ -45,8 +45,7 @@ class FormValidator {
   }
 
   _hasInvalidInput() {
-    const inputsList = Array.from(this._formElement.querySelectorAll("input"));
-    return inputsList.some((input) => !input.validity.valid);
+    return this._inputsList.some((input) => !input.validity.valid);
   }
 
   enableValidation() {
@@ -56,8 +55,7 @@ class FormValidator {
 
   resetValidation() {
     this._toggleSubmitButton();
-    const inputsList = Array.from(this._formElement.querySelectorAll("input"));
-    inputsList.forEach((inputElem) => {
+    this._inputsList.forEach((inputElem) => {
       this._hideInputError(inputElem);
     });
   }
