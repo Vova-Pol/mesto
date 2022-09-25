@@ -18,9 +18,11 @@ export class Card {
 
   generateCard() {
     this._element = this._getElement();
+    this._elementImage = this._element.querySelector(".elements__image");
+    this._buttonLike = this._element.querySelector(".elements__like-button");
 
-    this._element.querySelector(".elements__image").src = this._link;
-    this._element.querySelector(".elements__image").alt = this._name;
+    this._elementImage.src = this._link;
+    this._elementImage.alt = this._name;
     this._element.querySelector(".elements__title").textContent = this._name;
 
     this._setEventListeners();
@@ -29,11 +31,9 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(".elements__like-button")
-      .addEventListener("click", () => {
-        this._handleLikeButton();
-      });
+    this._buttonLike.addEventListener("click", () => {
+      this._handleLikeButton();
+    });
 
     this._element
       .querySelector(".elements__delete-button")
@@ -41,21 +41,18 @@ export class Card {
         this._handleDeleteButton();
       });
 
-    this._element
-      .querySelector(".elements__image")
-      .addEventListener("click", () => {
-        this._handleImage();
-      });
+    this._elementImage.addEventListener("click", () => {
+      this._handleImage();
+    });
   }
 
   _handleLikeButton() {
-    this._element
-      .querySelector(".elements__like-button")
-      .classList.toggle("elements__like-button_active");
+    this._buttonLike.classList.toggle("elements__like-button_active");
   }
 
   _handleDeleteButton() {
     this._element.remove();
+    this._element = null;
   }
 
   _handleImage() {
