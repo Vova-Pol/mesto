@@ -1,5 +1,5 @@
 import { cardsData } from "./cards-data.js";
-import { Card } from "./card.js";
+import { Card } from "./Card.js";
 import { FormValidator, validationConfig } from "./FormValidator.js";
 
 const page = document.querySelector(".page");
@@ -82,20 +82,7 @@ editProfileFormElement.addEventListener("submit", handleEditProfileFormSubmit);
 /* ----- Popup Add Post ----- */
 
 const popupAddPost = page.querySelector("#popup-add-post");
-
 const addPostButton = page.querySelector(".profile__add-button");
-
-/** Add Post Form */
-const addPostFormElement = document.querySelector("#add-post-form");
-const addPostForm = new FormValidator(validationConfig, addPostFormElement);
-addPostForm.enableValidation();
-
-addPostButton.addEventListener("click", () => {
-  addPostFormElement.reset();
-  openPopup(popupAddPost);
-  addPostForm.resetValidation();
-});
-
 const popupAddPostCloseButton = popupAddPost.querySelector(
   ".popup__close-button"
 );
@@ -103,6 +90,17 @@ const popupAddPostCloseButton = popupAddPost.querySelector(
 popupAddPostCloseButton.addEventListener("click", () => {
   closePopup(popupAddPost);
 });
+
+addPostButton.addEventListener("click", () => {
+  addPostFormElement.reset();
+  openPopup(popupAddPost);
+  addPostForm.resetValidation();
+});
+
+/** Add Post Form */
+const addPostFormElement = document.querySelector("#add-post-form");
+const addPostForm = new FormValidator(validationConfig, addPostFormElement);
+addPostForm.enableValidation();
 
 const placeNameInput = popupAddPost.querySelector("#place-name-input");
 const placeLinkInput = popupAddPost.querySelector("#place-link-input");
@@ -121,31 +119,26 @@ function handleAddPostFormSubmit(evt) {
   closePopup(popupAddPost);
 }
 
-const addFormElement = popupAddPost.querySelector(".popup__form");
-addFormElement.addEventListener("submit", handleAddPostFormSubmit);
+addPostFormElement.addEventListener("submit", handleAddPostFormSubmit);
 
-/* ----- Popup Image ----- */
+/* ----- Popup Preview ----- */
 
-const popupImage = page.querySelector("#popup-image");
+const popupPreview = page.querySelector("#popup-image");
 
-const popupImg = popupImage.querySelector(".popup__image");
-const popupSubtitle = popupImage.querySelector(".popup__subtitle");
+const popupImg = popupPreview.querySelector(".popup__image");
+const popupSubtitle = popupPreview.querySelector(".popup__subtitle");
 
-const popupImageCloseButton = popupImage.querySelector(".popup__close-button");
+const popupPreviewCloseButton = popupPreview.querySelector(
+  ".popup__close-button"
+);
 
-popupImageCloseButton.addEventListener("click", () => {
-  closePopup(popupImage);
+popupPreviewCloseButton.addEventListener("click", () => {
+  closePopup(popupPreview);
 });
 
 /* ----- Overlay Close Popup ----- */
 
 const popupsList = Array.from(page.querySelectorAll(".popup"));
-
-popupsList.forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
-    handleClosePopupByOverlay(popup, evt);
-  });
-});
 
 function handleClosePopupByOverlay(popup, evt) {
   if (evt.target === evt.currentTarget) {
@@ -153,4 +146,10 @@ function handleClosePopupByOverlay(popup, evt) {
   }
 }
 
-export { openPopup, popupImage, popupImg, popupSubtitle };
+popupsList.forEach((popup) => {
+  popup.addEventListener("click", (evt) => {
+    handleClosePopupByOverlay(popup, evt);
+  });
+});
+
+export { openPopup, popupPreview, popupImg, popupSubtitle };
