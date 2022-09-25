@@ -5,9 +5,17 @@ import { Card } from "./card.js";
 const page = document.querySelector(".page");
 const cardsContainer = page.querySelector(".elements__list");
 
+/** Create a Card Func */
+
+function createCard(cardElem) {
+  return cardElem.generateCard();
+}
+
+/** Add cards from the box */
+
 cardsData.forEach((elem) => {
   const card = new Card(elem, "#place-card");
-  const cardElement = card.generateCard();
+  const cardElement = createCard(card);
   cardsContainer.prepend(cardElement);
 });
 
@@ -113,7 +121,7 @@ function handlePostAddFormSubmit(evt) {
     link: placeLinkInput.value,
   };
   const card = new Card(placeCardData, "#place-card");
-  const cardElement = card.generateCard();
+  const cardElement = createCard(card);
 
   cardsContainer.prepend(cardElement);
   closePopup(popupAddPost);
