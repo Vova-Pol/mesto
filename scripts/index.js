@@ -44,13 +44,13 @@ const occupationInput = popupEdit.querySelector("#profile-occupation-input");
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 
-const editButton = page.querySelector(".profile__edit-button");
+const buttonEdit = page.querySelector(".profile__edit-button");
 
-editButton.addEventListener("click", () => {
+buttonEdit.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   occupationInput.value = profileOccupation.textContent;
   openPopup(popupEdit);
-  editProfileForm.resetValidation();
+  profileEditFormValidator.resetValidation();
 });
 
 const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
@@ -61,14 +61,14 @@ popupEditCloseButton.addEventListener("click", () => {
 
 /** Edit Profile Form */
 
-const editProfileFormElement = document.querySelector("#edit-profile-form");
-const editProfileForm = new FormValidator(
+const profileEditForm = document.querySelector("#edit-profile-form");
+const profileEditFormValidator = new FormValidator(
   validationConfig,
-  editProfileFormElement
+  profileEditForm
 );
-editProfileForm.enableValidation();
+profileEditFormValidator.enableValidation();
 
-function handleEditProfileFormSubmit(evt) {
+function handleProfileEditFormSubmit(evt) {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -77,12 +77,12 @@ function handleEditProfileFormSubmit(evt) {
   closePopup(popupEdit);
 }
 
-editProfileFormElement.addEventListener("submit", handleEditProfileFormSubmit);
+profileEditForm.addEventListener("submit", handleProfileEditFormSubmit);
 
 /* ----- Popup Add Post ----- */
 
 const popupAddPost = page.querySelector("#popup-add-post");
-const addPostButton = page.querySelector(".profile__add-button");
+const buttonAddPost = page.querySelector(".profile__add-button");
 const popupAddPostCloseButton = popupAddPost.querySelector(
   ".popup__close-button"
 );
@@ -91,21 +91,21 @@ popupAddPostCloseButton.addEventListener("click", () => {
   closePopup(popupAddPost);
 });
 
-addPostButton.addEventListener("click", () => {
-  addPostFormElement.reset();
+buttonAddPost.addEventListener("click", () => {
+  postAddForm.reset();
   openPopup(popupAddPost);
-  addPostForm.resetValidation();
+  postAddFormValidator.resetValidation();
 });
 
 /** Add Post Form */
-const addPostFormElement = document.querySelector("#add-post-form");
-const addPostForm = new FormValidator(validationConfig, addPostFormElement);
-addPostForm.enableValidation();
+const postAddForm = document.querySelector("#add-post-form");
+const postAddFormValidator = new FormValidator(validationConfig, postAddForm);
+postAddFormValidator.enableValidation();
 
 const placeNameInput = popupAddPost.querySelector("#place-name-input");
 const placeLinkInput = popupAddPost.querySelector("#place-link-input");
 
-function handleAddPostFormSubmit(evt) {
+function handlePostAddFormSubmit(evt) {
   evt.preventDefault();
 
   const placeCardData = {
@@ -119,7 +119,7 @@ function handleAddPostFormSubmit(evt) {
   closePopup(popupAddPost);
 }
 
-addPostFormElement.addEventListener("submit", handleAddPostFormSubmit);
+postAddForm.addEventListener("submit", handlePostAddFormSubmit);
 
 /* ----- Popup Preview ----- */
 
