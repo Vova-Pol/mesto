@@ -7,15 +7,15 @@ const cardsContainer = page.querySelector(".elements__list");
 
 /** Create a Card Func */
 
-function createCard(cardElem) {
-  return cardElem.generateCard();
+function createCard(cardData, templateSelector) {
+  const card = new Card(cardData, templateSelector);
+  return card.generateCard();
 }
 
 /** Add cards from the box */
 
-cardsData.forEach((elem) => {
-  const card = new Card(elem, "#place-card");
-  const cardElement = createCard(card);
+cardsData.forEach((cardData) => {
+  const cardElement = createCard(cardData, "#place-card");
   cardsContainer.prepend(cardElement);
 });
 
@@ -120,10 +120,10 @@ function handlePostAddFormSubmit(evt) {
     name: placeNameInput.value,
     link: placeLinkInput.value,
   };
-  const card = new Card(placeCardData, "#place-card");
-  const cardElement = createCard(card);
 
+  const cardElement = createCard(placeCardData, "#place-card");
   cardsContainer.prepend(cardElement);
+
   closePopup(popupAddPost);
 }
 
