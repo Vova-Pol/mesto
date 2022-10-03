@@ -4,6 +4,7 @@ import {
   validationConfig,
 } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
+import { Section } from "../components/Section.js";
 
 const page = document.querySelector(".page");
 const cardsContainer = page.querySelector(".elements__list");
@@ -17,10 +18,26 @@ function createCard(cardData, templateSelector) {
 
 /** Add cards from the box */
 
+const cardsList = new Section(
+  {
+    items: cardsData,
+    renderer: (item) => {
+      const cardElement = new Card(item, "#place-card");
+      const card = cardElement.generateCard();
+      cardsList.addItem(card);
+    },
+  },
+  ".elements__list"
+);
+
+cardsList.renderItems();
+
+/*
 cardsData.forEach((cardData) => {
   const cardElement = createCard(cardData, "#place-card");
   cardsContainer.prepend(cardElement);
 });
+*/
 
 /* Open Popup Func */
 
