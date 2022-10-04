@@ -73,17 +73,17 @@ function handleEscButton(evt) {
 
 /* ----- Popup Edit Profile ----- */
 
-const popupEdit = page.querySelector("#popup-edit");
+//const popupEdit = page.querySelector("#popup-edit");
 
-const nameInput = popupEdit.querySelector("#profile-name-input");
-const occupationInput = popupEdit.querySelector("#profile-occupation-input");
+//const nameInput = popupEdit.querySelector("#profile-name-input");
+//const occupationInput = popupEdit.querySelector("#profile-occupation-input");
 
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 
 const buttonEdit = page.querySelector(".profile__edit-button");
 
-buttonEdit.addEventListener("click", () => {
+/*buttonEdit.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   occupationInput.value = profileOccupation.textContent;
   openPopup(popupEdit);
@@ -94,11 +94,30 @@ const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
 
 popupEditCloseButton.addEventListener("click", () => {
   closePopup(popupEdit);
+});*/
+
+const popupEdit = new PopupWithForm("#popup-edit", {
+  handleSubmitForm: (evt) => {
+    evt.preventDefault();
+
+    const valuesArray = popupEdit._getInputsValues();
+
+    profileName.textContent = valuesArray[0];
+    profileOccupation.textContent = valuesArray[1];
+
+    popupEdit.close();
+  },
+});
+
+popupEdit.setEventListeners();
+
+buttonEdit.addEventListener("click", () => {
+  popupEdit.open();
 });
 
 /** Edit Profile Form */
 
-const profileEditForm = document.querySelector("#edit-profile-form");
+/*const profileEditForm = document.querySelector("#edit-profile-form");
 const profileEditFormValidator = new FormValidator(
   validationConfig,
   profileEditForm
@@ -114,7 +133,7 @@ function handleProfileEditFormSubmit(evt) {
   closePopup(popupEdit);
 }
 
-profileEditForm.addEventListener("submit", handleProfileEditFormSubmit);
+profileEditForm.addEventListener("submit", handleProfileEditFormSubmit);*/
 
 /* ----- Popup Add Post ----- */
 
