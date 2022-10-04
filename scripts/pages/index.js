@@ -41,13 +41,6 @@ const cardsList = new Section(
 
 cardsList.renderItems();
 
-/*
-cardsData.forEach((cardData) => {
-  const cardElement = createCard(cardData, "#place-card");
-  cardsContainer.prepend(cardElement);
-});
-*/
-
 /* Open Popup Func */
 
 function openPopup(popup) {
@@ -73,11 +66,6 @@ function handleEscButton(evt) {
 
 /* ----- Popup Edit Profile ----- */
 
-//const popupEdit = page.querySelector("#popup-edit");
-
-//const nameInput = popupEdit.querySelector("#profile-name-input");
-//const occupationInput = popupEdit.querySelector("#profile-occupation-input");
-
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 
@@ -88,12 +76,6 @@ const buttonEdit = page.querySelector(".profile__edit-button");
   occupationInput.value = profileOccupation.textContent;
   openPopup(popupEdit);
   profileEditFormValidator.resetValidation();
-});
-
-const popupEditCloseButton = popupEdit.querySelector(".popup__close-button");
-
-popupEditCloseButton.addEventListener("click", () => {
-  closePopup(popupEdit);
 });*/
 
 const popupEdit = new PopupWithForm("#popup-edit", {
@@ -124,30 +106,9 @@ const profileEditFormValidator = new FormValidator(
 );
 profileEditFormValidator.enableValidation();
 
-function handleProfileEditFormSubmit(evt) {
-  evt.preventDefault();
-
-  profileName.textContent = nameInput.value;
-  profileOccupation.textContent = occupationInput.value;
-
-  closePopup(popupEdit);
-}
-
-profileEditForm.addEventListener("submit", handleProfileEditFormSubmit);*/
-
 /* ----- Popup Add Post ----- */
 
-//const popupAddPost = page.querySelector("#popup-add-post");
-
-//const popupAddPostCloseButton = popupAddPost.querySelector(
-//  ".popup__close-button"
-//);
-
-/*popupAddPostCloseButton.addEventListener("click", () => {
-  closePopup(popupAddPost);
-});
-
-buttonAddPost.addEventListener("click", () => {
+/*buttonAddPost.addEventListener("click", () => {
   postAddForm.reset();
   openPopup(popupAddPost);
   postAddFormValidator.resetValidation();
@@ -185,28 +146,9 @@ buttonAddPost.addEventListener("click", () => {
 });
 
 /** Add Post Form */
-/*const postAddForm = document.querySelector("#add-post-form");
-const postAddFormValidator = new FormValidator(validationConfig, postAddForm);
-postAddFormValidator.enableValidation();
 
-const placeNameInput = popupAddPost.querySelector("#place-name-input");
-const placeLinkInput = popupAddPost.querySelector("#place-link-input");
-
-function handlePostAddFormSubmit(evt) {
-  evt.preventDefault();
-
-  const placeCardData = {
-    name: placeNameInput.value,
-    link: placeLinkInput.value,
-  };
-
-  const cardElement = createCard(placeCardData, "#place-card");
-  cardsContainer.prepend(cardElement);
-
-  closePopup(popupAddPost);
-}
-
-postAddForm.addEventListener("submit", handlePostAddFormSubmit);*/
+//const postAddFormValidator = new FormValidator(validationConfig, postAddForm);
+//postAddFormValidator.enableValidation();
 
 /* ----- Popup Preview ----- */
 
