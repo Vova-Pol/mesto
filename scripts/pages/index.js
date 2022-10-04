@@ -5,7 +5,7 @@ import {
 } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
-import { PopupWithImage } from "../components/Popup.js";
+import { PopupWithImage, PopupWithForm } from "../components/Popup.js";
 
 const page = document.querySelector(".page");
 const cardsContainer = page.querySelector(".elements__list");
@@ -118,13 +118,13 @@ profileEditForm.addEventListener("submit", handleProfileEditFormSubmit);
 
 /* ----- Popup Add Post ----- */
 
-const popupAddPost = page.querySelector("#popup-add-post");
-const buttonAddPost = page.querySelector(".profile__add-button");
-const popupAddPostCloseButton = popupAddPost.querySelector(
-  ".popup__close-button"
-);
+//const popupAddPost = page.querySelector("#popup-add-post");
 
-popupAddPostCloseButton.addEventListener("click", () => {
+//const popupAddPostCloseButton = popupAddPost.querySelector(
+//  ".popup__close-button"
+//);
+
+/*popupAddPostCloseButton.addEventListener("click", () => {
   closePopup(popupAddPost);
 });
 
@@ -132,10 +132,41 @@ buttonAddPost.addEventListener("click", () => {
   postAddForm.reset();
   openPopup(popupAddPost);
   postAddFormValidator.resetValidation();
+});*/
+
+// --- Popup Add Post
+
+const popupAddPost = new PopupWithForm("#popup-add-post", {
+  handleSubmitForm: (evt) => {
+    evt.preventDefault();
+
+    const valuesArray = popupAddPost._getInputsValues();
+    const cardData = {
+      name: valuesArray[0],
+      link: valuesArray[1],
+    };
+
+    const cardElement = createCard(cardData, "#place-card", {
+      handleCardClick: () => {
+        popupPreview.open(cardData.link, cardData.name);
+      },
+    });
+
+    cardsContainer.prepend(cardElement);
+    popupAddPost.close();
+  },
+});
+
+popupAddPost.setEventListeners();
+
+const buttonAddPost = page.querySelector(".profile__add-button");
+
+buttonAddPost.addEventListener("click", () => {
+  popupAddPost.open();
 });
 
 /** Add Post Form */
-const postAddForm = document.querySelector("#add-post-form");
+/*const postAddForm = document.querySelector("#add-post-form");
 const postAddFormValidator = new FormValidator(validationConfig, postAddForm);
 postAddFormValidator.enableValidation();
 
@@ -156,7 +187,7 @@ function handlePostAddFormSubmit(evt) {
   closePopup(popupAddPost);
 }
 
-postAddForm.addEventListener("submit", handlePostAddFormSubmit);
+postAddForm.addEventListener("submit", handlePostAddFormSubmit);*/
 
 /* ----- Popup Preview ----- */
 
@@ -178,5 +209,3 @@ popupsList.forEach((popup) => {
     handleClosePopupByOverlay(popup, evt);
   });
 });
-
-export { openPopup, popupPreview };
