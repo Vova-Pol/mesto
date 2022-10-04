@@ -1,6 +1,8 @@
 export class Popup {
   constructor(popupSelector) {
     this._element = document.querySelector(popupSelector);
+    this._image = this._element.querySelector(".popup__image");
+    this._subtitle = this._element.querySelector(".popup__subtitle");
   }
 
   open() {
@@ -15,8 +17,7 @@ export class Popup {
 
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      //this.close().bind(this._element);
-      this.close();
+      //this.close().bind(); --------------- пофиксить!
     }
   }
 
@@ -24,7 +25,6 @@ export class Popup {
     const closeButton = this._element.querySelector(".popup__close-button");
 
     closeButton.addEventListener("click", () => {
-      //this.close().bind(this._element);
       this.close();
     });
 
@@ -33,5 +33,19 @@ export class Popup {
         this.close();
       }
     });
+  }
+}
+
+export class PopupWithImage extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+  }
+
+  open(imageLink, imageTitle) {
+    super.open();
+
+    this._image.src = imageLink;
+    this._image.alt = imageTitle;
+    this._subtitle.textContent = imageTitle;
   }
 }

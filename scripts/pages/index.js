@@ -5,7 +5,7 @@ import {
 } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
-import { Popup } from "../components/Popup.js";
+import { PopupWithImage } from "../components/Popup.js";
 
 const page = document.querySelector(".page");
 const cardsContainer = page.querySelector(".elements__list");
@@ -13,7 +13,11 @@ const cardsContainer = page.querySelector(".elements__list");
 /** Create a Card Func */
 
 function createCard(cardData, templateSelector) {
-  const card = new Card(cardData, templateSelector);
+  const card = new Card(cardData, templateSelector, {
+    handleCardClick: () => {
+      popupPreview.open(cardData.link, cardData.name);
+    },
+  });
   return card.generateCard();
 }
 
@@ -23,7 +27,11 @@ const cardsList = new Section(
   {
     items: cardsData,
     renderer: (item) => {
-      const cardElement = new Card(item, "#place-card");
+      const cardElement = new Card(item, "#place-card", {
+        handleCardClick: () => {
+          popupPreview.open(item.link, item.name);
+        },
+      });
       const card = cardElement.generateCard();
       cardsList.addItem(card);
     },
@@ -152,18 +160,8 @@ postAddForm.addEventListener("submit", handlePostAddFormSubmit);
 
 /* ----- Popup Preview ----- */
 
-const popupPreview = page.querySelector("#popup-image");
-
-const popupImg = popupPreview.querySelector(".popup__image");
-const popupSubtitle = popupPreview.querySelector(".popup__subtitle");
-
-const popupPreviewCloseButton = popupPreview.querySelector(
-  ".popup__close-button"
-);
-
-popupPreviewCloseButton.addEventListener("click", () => {
-  closePopup(popupPreview);
-});
+const popupPreview = new PopupWithImage("#popup-image");
+popupPreview.setEventListeners();
 
 /* ----- Overlay Close Popup ----- */
 
@@ -181,4 +179,4 @@ popupsList.forEach((popup) => {
   });
 });
 
-export { openPopup, popupPreview, popupImg, popupSubtitle };
+export { openPopup, popupPreview };
