@@ -52,9 +52,6 @@ const userInfoElement = new UserInfo({
 
 // --- Popup Edit Profile
 
-const profileName = page.querySelector(".profile__name");
-const profileOccupation = page.querySelector(".profile__occupation");
-
 const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (evt) => {
     evt.preventDefault();
