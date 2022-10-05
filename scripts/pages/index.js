@@ -7,6 +7,7 @@ import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
 
 const page = document.querySelector(".page");
 const cardsContainer = page.querySelector(".elements__list");
@@ -42,6 +43,13 @@ const cardsList = new Section(
 
 cardsList.renderItems();
 
+// --- User Info
+
+const userInfoElement = new UserInfo({
+  userNameSelector: ".profile__name",
+  userOccupationSelector: ".profile__occupation",
+});
+
 // --- Popup Edit Profile
 
 const profileName = page.querySelector(".profile__name");
@@ -53,8 +61,7 @@ const popupEdit = new PopupWithForm("#popup-edit", {
 
     const valuesArray = popupEdit._getInputsValues();
 
-    profileName.textContent = valuesArray[0];
-    profileOccupation.textContent = valuesArray[1];
+    userInfoElement.setUserInfo(valuesArray[0], valuesArray[1]);
 
     popupEdit.close();
   },
@@ -76,8 +83,11 @@ const occupationInput = popupEdit.formElement.querySelector(
 );
 
 buttonEdit.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  occupationInput.value = profileOccupation.textContent;
+  const userData = userInfoElement.getUserInfo();
+
+  nameInput.value = userData.name;
+  occupationInput.value = userData.occupation;
+
   profileEditFormValidator.resetValidation();
   popupEdit.open();
 });
