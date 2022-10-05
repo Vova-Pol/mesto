@@ -41,22 +41,6 @@ const cardsList = new Section(
 
 cardsList.renderItems();
 
-/* Close Popup Func */
-
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleEscButton);
-}
-
-/* ----- Esc Button Close Popup ----- */
-
-function handleEscButton(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = page.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
-
 // --- Popup Edit Profile
 
 const profileName = page.querySelector(".profile__name");
