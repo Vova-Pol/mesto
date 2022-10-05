@@ -1,13 +1,13 @@
-import { cardsData } from "../utils/cards-data.js";
+import { cardsData } from "./scripts/utils/cards-data.js";
 import {
   FormValidator,
   validationConfig,
-} from "../components/FormValidator.js";
-import { Card } from "../components/Card.js";
-import { Section } from "../components/Section.js";
-import { PopupWithImage } from "../components/PopupWithImage.js";
-import { PopupWithForm } from "../components/PopupWithForm.js";
-import { UserInfo } from "../components/UserInfo.js";
+} from "./scripts/components/FormValidator.js";
+import { Card } from "./scripts/components/Card.js";
+import { Section } from "./scripts/components/Section.js";
+import { PopupWithForm } from "./scripts/components/PopupWithForm.js";
+import { PopupWithImage } from "./scripts/components/PopupWithImage.js";
+import { UserInfo } from "./scripts/components/UserInfo.js";
 
 const page = document.querySelector(".page");
 const cardsContainer = page.querySelector(".elements__list");
