@@ -64,7 +64,7 @@ function handleEscButton(evt) {
   }
 }
 
-/* ----- Popup Edit Profile ----- */
+// --- Popup Edit Profile
 
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
@@ -104,14 +104,6 @@ buttonEdit.addEventListener("click", () => {
   popupEdit.open();
 });
 
-/* ----- Popup Add Post ----- */
-
-/*buttonAddPost.addEventListener("click", () => {
-  postAddForm.reset();
-  openPopup(popupAddPost);
-  postAddFormValidator.resetValidation();
-});*/
-
 // --- Popup Add Post
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
@@ -137,16 +129,19 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
 
 popupAddPost.setEventListeners();
 
+const postAddFormValidator = new FormValidator(
+  validationConfig,
+  popupAddPost.formElement
+);
+postAddFormValidator.enableValidation();
+
 const buttonAddPost = page.querySelector(".profile__add-button");
 
 buttonAddPost.addEventListener("click", () => {
   popupAddPost.open();
+  popupAddPost.formElement.reset();
+  postAddFormValidator.resetValidation();
 });
-
-/** Add Post Form */
-
-//const postAddFormValidator = new FormValidator(validationConfig, postAddForm);
-//postAddFormValidator.enableValidation();
 
 /* ----- Popup Preview ----- */
 
