@@ -69,15 +69,6 @@ function handleEscButton(evt) {
 const profileName = page.querySelector(".profile__name");
 const profileOccupation = page.querySelector(".profile__occupation");
 
-const buttonEdit = page.querySelector(".profile__edit-button");
-
-/*buttonEdit.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  occupationInput.value = profileOccupation.textContent;
-  openPopup(popupEdit);
-  profileEditFormValidator.resetValidation();
-});*/
-
 const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (evt) => {
     evt.preventDefault();
@@ -93,18 +84,25 @@ const popupEdit = new PopupWithForm("#popup-edit", {
 
 popupEdit.setEventListeners();
 
-buttonEdit.addEventListener("click", () => {
-  popupEdit.open();
-});
-
-/** Edit Profile Form */
-
-/*const profileEditForm = document.querySelector("#edit-profile-form");
 const profileEditFormValidator = new FormValidator(
   validationConfig,
-  profileEditForm
+  popupEdit.formElement
 );
+
 profileEditFormValidator.enableValidation();
+
+const buttonEdit = page.querySelector(".profile__edit-button");
+const nameInput = popupEdit.formElement.querySelector("#profile-name-input");
+const occupationInput = popupEdit.formElement.querySelector(
+  "#profile-occupation-input"
+);
+
+buttonEdit.addEventListener("click", () => {
+  nameInput.value = profileName.textContent;
+  occupationInput.value = profileOccupation.textContent;
+  profileEditFormValidator.resetValidation();
+  popupEdit.open();
+});
 
 /* ----- Popup Add Post ----- */
 
