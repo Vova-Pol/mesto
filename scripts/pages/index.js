@@ -41,13 +41,6 @@ const cardsList = new Section(
 
 cardsList.renderItems();
 
-/* Open Popup Func */
-
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", handleEscButton);
-}
-
 /* Close Popup Func */
 
 function closePopup(popup) {
@@ -143,23 +136,8 @@ buttonAddPost.addEventListener("click", () => {
   postAddFormValidator.resetValidation();
 });
 
-/* ----- Popup Preview ----- */
+// --- Popup Preview
 
 const popupPreview = new PopupWithImage("#popup-image");
+
 popupPreview.setEventListeners();
-
-/* ----- Overlay Close Popup ----- */
-
-const popupsList = Array.from(page.querySelectorAll(".popup"));
-
-function handleClosePopupByOverlay(popup, evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popup);
-  }
-}
-
-popupsList.forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
-    handleClosePopupByOverlay(popup, evt);
-  });
-});
