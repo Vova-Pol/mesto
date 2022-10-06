@@ -1,8 +1,7 @@
 export class Popup {
   constructor(popupSelector) {
     this._element = document.querySelector(popupSelector);
-    this._image = this._element.querySelector(".popup__image");
-    this._subtitle = this._element.querySelector(".popup__subtitle");
+    this._closeButton = this._element.querySelector(".popup__close-button");
     this._handleEscButtonBound = this._handleEscClose.bind(this);
   }
 
@@ -23,9 +22,7 @@ export class Popup {
   }
 
   setEventListeners() {
-    const closeButton = this._element.querySelector(".popup__close-button");
-
-    closeButton.addEventListener("click", () => {
+    this._closeButton.addEventListener("click", () => {
       this.close();
     });
 
