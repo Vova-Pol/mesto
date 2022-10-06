@@ -24,3 +24,12 @@ export const cardsData = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
+
+export const cardsContainer = document.querySelector(".elements__list");
+
+export const buttonEdit = document.querySelector(".profile__edit-button");
+export const nameInput = document.querySelector("#profile-name-input");
+export const occupationInput = document.querySelector(
+  "#profile-occupation-input"
+);
+export const buttonAddPost = document.querySelector(".profile__add-button");

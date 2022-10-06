@@ -1,6 +1,17 @@
+// Css import
 import "./pages/index.css";
 
-import { cardsData } from "./scripts/utils/cards-data.js";
+// Constants import
+import {
+  cardsData,
+  cardsContainer,
+  buttonEdit,
+  nameInput,
+  occupationInput,
+  buttonAddPost,
+} from "./scripts/utils/constants.js";
+
+// Components import
 import {
   FormValidator,
   validationConfig,
@@ -10,9 +21,6 @@ import { Section } from "./scripts/components/Section.js";
 import { PopupWithForm } from "./scripts/components/PopupWithForm.js";
 import { PopupWithImage } from "./scripts/components/PopupWithImage.js";
 import { UserInfo } from "./scripts/components/UserInfo.js";
-
-const page = document.querySelector(".page");
-const cardsContainer = page.querySelector(".elements__list");
 
 /** Create a Card Func */
 
@@ -75,12 +83,6 @@ const profileEditFormValidator = new FormValidator(
 
 profileEditFormValidator.enableValidation();
 
-const buttonEdit = page.querySelector(".profile__edit-button");
-const nameInput = popupEdit.formElement.querySelector("#profile-name-input");
-const occupationInput = popupEdit.formElement.querySelector(
-  "#profile-occupation-input"
-);
-
 buttonEdit.addEventListener("click", () => {
   const userData = userInfoElement.getUserInfo();
 
@@ -121,8 +123,6 @@ const postAddFormValidator = new FormValidator(
   popupAddPost.formElement
 );
 postAddFormValidator.enableValidation();
-
-const buttonAddPost = page.querySelector(".profile__add-button");
 
 buttonAddPost.addEventListener("click", () => {
   popupAddPost.open();
