@@ -9,13 +9,11 @@ import {
   nameInput,
   occupationInput,
   buttonAddPost,
+  validationConfig,
 } from "./scripts/utils/constants.js";
 
 // Components import
-import {
-  FormValidator,
-  validationConfig,
-} from "./scripts/components/FormValidator.js";
+import { FormValidator } from "./scripts/components/FormValidator.js";
 import { Card } from "./scripts/components/Card.js";
 import { Section } from "./scripts/components/Section.js";
 import { PopupWithForm } from "./scripts/components/PopupWithForm.js";

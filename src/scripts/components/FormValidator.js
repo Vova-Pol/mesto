@@ -1,4 +1,4 @@
-class FormValidator {
+export class FormValidator {
   constructor(validationConfig, formElement) {
     this._validationConfig = validationConfig;
     this._formElement = formElement;
@@ -60,12 +60,3 @@ class FormValidator {
     });
   }
 }
-
-const validationConfig = {
-  inputSelector: ".popup__input",
-  buttonSelector: ".popup__save-button",
-  errorSelector: ".popup__input-error",
-  inputErrorClass: "popup__input_type_error",
-};
-
-export { FormValidator, validationConfig };
