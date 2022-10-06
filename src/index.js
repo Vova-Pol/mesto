@@ -12,6 +12,9 @@ import {
   validationConfig,
 } from "./scripts/utils/constants.js";
 
+// Utils import
+import { createCard } from "./scripts/utils/utils.js";
+
 // Components import
 import { FormValidator } from "./scripts/components/FormValidator.js";
 import { Card } from "./scripts/components/Card.js";
@@ -20,18 +23,7 @@ import { PopupWithForm } from "./scripts/components/PopupWithForm.js";
 import { PopupWithImage } from "./scripts/components/PopupWithImage.js";
 import { UserInfo } from "./scripts/components/UserInfo.js";
 
-/** Create a Card Func */
-
-function createCard(cardData, templateSelector) {
-  const card = new Card(cardData, templateSelector, {
-    handleCardClick: () => {
-      popupPreview.open(cardData.link, cardData.name);
-    },
-  });
-  return card.generateCard();
-}
-
-/** Add cards from the box */
+// --- Add cards from the box
 
 const cardsList = new Section(
   {
