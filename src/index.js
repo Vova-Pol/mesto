@@ -49,10 +49,10 @@ const userInfoElement = new UserInfo({
 
 const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (inputsValues) => {
-    userInfoElement.setUserInfo(
-      inputsValues.profileNameInput,
-      inputsValues.profileOccupationInput
-    );
+    userInfoElement.setUserInfo({
+      name: inputsValues.profileNameInput,
+      occupation: inputsValues.profileOccupationInput,
+    });
   },
 });
 

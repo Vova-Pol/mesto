@@ -13,8 +13,8 @@ export class UserInfo {
     return userData;
   }
 
-  setUserInfo(newName, newOccupation) {
-    this._nameElement.textContent = newName;
-    this._occupationElement.textContent = newOccupation;
+  setUserInfo({ name, occupation }) {
+    this._nameElement.textContent = name;
+    this._occupationElement.textContent = occupation;
   }
 }
