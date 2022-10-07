@@ -1,5 +1,5 @@
 import { Card } from "../components/Card.js";
-import { popupPreview } from "../../index.js";
+import { popupPreview } from "../pages/index.js";
 
 export function createCard({ name, link }, templateSelector) {
   const card = new Card({ name, link }, templateSelector, {

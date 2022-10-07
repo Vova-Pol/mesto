@@ -1,5 +1,5 @@
 // Css import
-import "./pages/index.css";
+import "./index.css";
 
 // Constants import
 import {
@@ -10,18 +10,17 @@ import {
   occupationInput,
   buttonAddPost,
   validationConfig,
-} from "./scripts/utils/constants.js";
+} from "../utils/constants.js";
 
 // Utils import
-import { createCard } from "./scripts/utils/utils.js";
+import { createCard } from "../utils/utils.js";
 
 // Components import
-import { FormValidator } from "./scripts/components/FormValidator.js";
-import { Card } from "./scripts/components/Card.js";
-import { Section } from "./scripts/components/Section.js";
-import { PopupWithForm } from "./scripts/components/PopupWithForm.js";
-import { PopupWithImage } from "./scripts/components/PopupWithImage.js";
-import { UserInfo } from "./scripts/components/UserInfo.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
 
 // --- Add cards from the box
 
