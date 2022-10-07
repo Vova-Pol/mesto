@@ -48,14 +48,8 @@ const userInfoElement = new UserInfo({
 // --- Popup Edit Profile
 
 const popupEdit = new PopupWithForm("#popup-edit", {
-  handleSubmitForm: (evt) => {
-    evt.preventDefault();
-
-    const valuesArray = popupEdit._getInputsValues();
-
+  handleSubmitForm: (valuesArray) => {
     userInfoElement.setUserInfo(valuesArray[0], valuesArray[1]);
-
-    popupEdit.close();
   },
 });
 
@@ -81,10 +75,7 @@ buttonEdit.addEventListener("click", () => {
 // --- Popup Add Post
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
-  handleSubmitForm: (evt) => {
-    evt.preventDefault();
-
-    const valuesArray = popupAddPost._getInputsValues();
+  handleSubmitForm: (valuesArray) => {
     const cardData = {
       name: valuesArray[0],
       link: valuesArray[1],
@@ -97,7 +88,6 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
     });
 
     cardsContainer.prepend(cardElement);
-    popupAddPost.close();
   },
 });
 
