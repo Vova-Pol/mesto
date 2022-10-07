@@ -27,16 +27,15 @@ import { UserInfo } from "./scripts/components/UserInfo.js";
 
 const cardsList = new Section(
   {
-    items: cardsData,
-    renderer: (item) => {
-      const card = createCard(item, "#place-card");
+    renderer: (itemData) => {
+      const card = createCard(itemData, "#place-card");
       cardsList.addItem(card);
     },
   },
   ".elements__list"
 );
 
-cardsList.renderItems();
+cardsList.renderItems(cardsData);
 
 // --- User Info
 
