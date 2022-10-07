@@ -48,8 +48,11 @@ const userInfoElement = new UserInfo({
 // --- Popup Edit Profile
 
 const popupEdit = new PopupWithForm("#popup-edit", {
-  handleSubmitForm: (valuesArray) => {
-    userInfoElement.setUserInfo(valuesArray[0], valuesArray[1]);
+  handleSubmitForm: (inputsValues) => {
+    userInfoElement.setUserInfo(
+      inputsValues.profileNameInput,
+      inputsValues.profileOccupationInput
+    );
   },
 });
 
@@ -75,17 +78,14 @@ buttonEdit.addEventListener("click", () => {
 // --- Popup Add Post
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
-  handleSubmitForm: (valuesArray) => {
-    const cardData = {
-      name: valuesArray[0],
-      link: valuesArray[1],
-    };
-
-    const cardElement = createCard(cardData, "#place-card", {
-      handleCardClick: () => {
-        popupPreview.open(cardData.link, cardData.name);
+  handleSubmitForm: (inputsValues) => {
+    const cardElement = createCard(
+      {
+        name: inputsValues.placeNameInput,
+        link: inputsValues.placeLinkInput,
       },
-    });
+      "#place-card"
+    );
 
     cardsContainer.prepend(cardElement);
   },

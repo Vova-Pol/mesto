@@ -1,10 +1,10 @@
 import { Card } from "../components/Card.js";
 import { popupPreview } from "../../index.js";
 
-export function createCard(cardData, templateSelector) {
-  const card = new Card(cardData, templateSelector, {
+export function createCard({ name, link }, templateSelector) {
+  const card = new Card({ name, link }, templateSelector, {
     handleCardClick: () => {
-      popupPreview.open(cardData.link, cardData.name);
+      popupPreview.open(link, name);
     },
   });
   return card.generateCard();

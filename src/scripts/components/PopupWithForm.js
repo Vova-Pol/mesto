@@ -9,7 +9,11 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputsValues() {
-    return this._inputsList.map((input) => input.value);
+    const inputsValues = {};
+    this._inputsList.forEach((input) => {
+      inputsValues[input.name] = input.value;
+    });
+    return inputsValues;
   }
 
   setEventListeners() {
@@ -17,8 +21,8 @@ export class PopupWithForm extends Popup {
 
     this.formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      const valuesArray = this._getInputsValues();
-      this._handleSubmitForm(valuesArray);
+      const inputsValues = this._getInputsValues();
+      this._handleSubmitForm(inputsValues);
       this.close();
     });
   }
