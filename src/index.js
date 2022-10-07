@@ -29,12 +29,7 @@ const cardsList = new Section(
   {
     items: cardsData,
     renderer: (item) => {
-      const cardElement = new Card(item, "#place-card", {
-        handleCardClick: () => {
-          popupPreview.open(item.link, item.name);
-        },
-      });
-      const card = cardElement.generateCard();
+      const card = createCard(item, "#place-card");
       cardsList.addItem(card);
     },
   },
@@ -122,6 +117,6 @@ buttonAddPost.addEventListener("click", () => {
 
 // --- Popup Preview
 
-const popupPreview = new PopupWithImage("#popup-image");
+export const popupPreview = new PopupWithImage("#popup-image");
 
 popupPreview.setEventListeners();
