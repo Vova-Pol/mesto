@@ -29,17 +29,28 @@ import { UserInfo } from "../components/UserInfo.js";
 
 // --- Add cards from the box
 
-const cardsList = new Section(
-  {
-    renderer: (itemData) => {
-      const card = createCard(itemData, "#place-card");
-      cardsList.addItem(card);
-    },
-  },
-  ".elements__list"
-);
+const cardsDataRequestURL =
+  "https://mesto.nomoreparties.co/v1/cohort-52/cards ";
 
-cardsList.renderItems(cardsData);
+fetch(cardsDataRequestURL, {
+  headers: {
+    authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
+  },
+})
+  .then((res) => res.json())
+  .then((data) => {
+    const cardsList = new Section(
+      {
+        renderer: (itemData) => {
+          const card = createCard(itemData, "#place-card");
+          cardsList.addItem(card);
+        },
+      },
+      ".elements__list"
+    );
+
+    cardsList.renderItems(data);
+  });
 
 // --- User Info
 
