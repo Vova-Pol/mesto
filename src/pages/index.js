@@ -71,7 +71,7 @@ fetch(userInfoRequestURL, {
   .then((data) => {
     const userData = {
       name: data.name,
-      occupation: data.about,
+      about: data.about,
       avatarLink: data.avatar,
     };
     userInfoElement.setUserInfo(userData);
@@ -84,9 +84,15 @@ fetch(userInfoRequestURL, {
 
 const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (inputsValues) => {
-    userInfoElement.setUserInfo({
-      name: inputsValues.profileNameInput,
-      occupation: inputsValues.profileOccupationInput,
+    userInfoElement.setUserInfo(inputsValues);
+
+    fetch("https://mesto.nomoreparties.co/v1/cohort-52/users/me", {
+      method: "PATCH",
+      headers: {
+        authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputsValues),
     });
   },
 });
