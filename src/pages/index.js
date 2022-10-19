@@ -1,3 +1,8 @@
+/**
+ * Token: a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4
+ * ID: cohort-52
+ */
+
 // Css import
 import "./index.css";
 
@@ -38,10 +43,31 @@ cardsList.renderItems(cardsData);
 
 // --- User Info
 
+const userInfoRequestURL = "https://nomoreparties.co/v1/cohort-52/users/me";
+
 const userInfoElement = new UserInfo({
   userNameSelector: ".profile__name",
   userOccupationSelector: ".profile__occupation",
+  userAvatarSelector: ".profile__picture",
 });
+
+fetch(userInfoRequestURL, {
+  headers: {
+    authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
+  },
+})
+  .then((res) => res.json())
+  .then((data) => {
+    const userData = {
+      name: data.name,
+      occupation: data.about,
+      avatarLink: data.avatar,
+    };
+    userInfoElement.setUserInfo(userData);
+  })
+  .catch(() => {
+    console.log("Что-то пошло не так.");
+  });
 
 // --- Popup Edit Profile
 
