@@ -99,6 +99,8 @@ const popupEdit = new PopupWithForm("#popup-edit", {
 
 popupEdit.setEventListeners();
 
+// --- Profile Form Validator
+
 const profileEditFormValidator = new FormValidator(
   validationConfig,
   popupEdit.formElement
@@ -120,13 +122,16 @@ buttonEdit.addEventListener("click", () => {
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
   handleSubmitForm: (inputsValues) => {
-    const cardElement = createCard(
-      {
-        name: inputsValues.placeNameInput,
-        link: inputsValues.placeLinkInput,
+    const cardElement = createCard(inputsValues, "#place-card");
+
+    fetch("https://mesto.nomoreparties.co/v1/cohort-52/cards", {
+      method: "POST",
+      headers: {
+        authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
+        "Content-Type": "application/json",
       },
-      "#place-card"
-    );
+      body: JSON.stringify(inputsValues),
+    });
 
     cardsContainer.prepend(cardElement);
   },
