@@ -1,7 +1,8 @@
 export class Card {
-  constructor({ name, link }, templateSelector, { handleCardClick }) {
+  constructor({ name, link, likes }, templateSelector, { handleCardClick }) {
     this._name = name;
     this._link = link;
+    this._likes = likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -19,6 +20,9 @@ export class Card {
     this._element = this._getElement();
     this._elementImage = this._element.querySelector(".elements__image");
     this._buttonLike = this._element.querySelector(".elements__like-button");
+
+    this._likesCounter = this._element.querySelector(".elements__like-counter");
+    this._likesCounter.textContent = this._likes.length;
 
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
@@ -47,6 +51,14 @@ export class Card {
 
   _handleLikeButton() {
     this._buttonLike.classList.toggle("elements__like-button_active");
+    // fetch("https://mesto.nomoreparties.co/v1/cohort-52/cards", {
+    //   method: "PATCH",
+    //   headers: {
+    //     authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify()
+    // });
   }
 
   _handleDeleteButton() {

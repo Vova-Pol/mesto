@@ -62,6 +62,8 @@ const userInfoElement = new UserInfo({
   userAvatarSelector: ".profile__picture",
 });
 
+const userData = {};
+
 fetch(userInfoRequestURL, {
   headers: {
     authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
@@ -69,11 +71,9 @@ fetch(userInfoRequestURL, {
 })
   .then((res) => res.json())
   .then((data) => {
-    const userData = {
-      name: data.name,
-      about: data.about,
-      avatarLink: data.avatar,
-    };
+    userData.name = data.name;
+    userData.about = data.about;
+    userData.avatarLink = data.avatar;
     userInfoElement.setUserInfo(userData);
   })
   .catch(() => {
