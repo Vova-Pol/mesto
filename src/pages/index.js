@@ -8,7 +8,6 @@ import "./index.css";
 
 // Constants import
 import {
-  cardsData,
   cardsContainer,
   buttonEdit,
   nameInput,
@@ -19,6 +18,7 @@ import {
 
 // Utils import
 import { createCard } from "../utils/utils.js";
+import { patchData } from "../utils/utils.js";
 
 // Components import
 import { FormValidator } from "../components/FormValidator.js";
@@ -29,8 +29,7 @@ import { UserInfo } from "../components/UserInfo.js";
 
 // --- Add cards from the box
 
-const cardsDataRequestURL =
-  "https://mesto.nomoreparties.co/v1/cohort-52/cards ";
+const cardsDataRequestURL = "https://mesto.nomoreparties.co/v1/cohort-52/cards";
 
 fetch(cardsDataRequestURL, {
   headers: {
@@ -85,15 +84,7 @@ fetch(userInfoRequestURL, {
 const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (inputsValues) => {
     userInfoElement.setUserInfo(inputsValues);
-
-    fetch("https://mesto.nomoreparties.co/v1/cohort-52/users/me", {
-      method: "PATCH",
-      headers: {
-        authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(inputsValues),
-    });
+    patchData(userInfoRequestURL, inputsValues);
   },
 });
 
@@ -156,3 +147,5 @@ buttonAddPost.addEventListener("click", () => {
 export const popupPreview = new PopupWithImage("#popup-image");
 
 popupPreview.setEventListeners();
+
+export { userData };

@@ -1,8 +1,15 @@
+import { userData } from "../pages/index.js";
+
 export class Card {
-  constructor({ name, link, likes }, templateSelector, { handleCardClick }) {
+  constructor(
+    { name, link, likes, _id },
+    templateSelector,
+    { handleCardClick }
+  ) {
     this._name = name;
     this._link = link;
     this._likes = likes;
+    this._id = _id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -50,15 +57,13 @@ export class Card {
   }
 
   _handleLikeButton() {
+    if (!this._buttonLike.classList.contains("elements__like-button_active")) {
+      this._likesCounter.textContent = this._likes.length + 1;
+    } else {
+      this._likesCounter.textContent = this._likes.length;
+    }
+
     this._buttonLike.classList.toggle("elements__like-button_active");
-    // fetch("https://mesto.nomoreparties.co/v1/cohort-52/cards", {
-    //   method: "PATCH",
-    //   headers: {
-    //     authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify()
-    // });
   }
 
   _handleDeleteButton() {
