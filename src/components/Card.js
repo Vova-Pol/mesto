@@ -67,7 +67,10 @@ export class Card {
   }
 
   _handleDeleteButton() {
-    this._element.remove();
-    this._element = null;
+    const popupDeleteCard = document.querySelector("#popup-delete-card");
+    popupDeleteCard.classList.add("popup_opened");
+
+    // this._element.remove();
+    // this._element = null;
   }
 }

@@ -90,6 +90,16 @@ const popupEdit = new PopupWithForm("#popup-edit", {
 
 popupEdit.setEventListeners();
 
+// --- Popup Delete Card
+
+const popupDeleteCard = new PopupWithForm("#popup-delete-card", {
+  handleSubmitForm: () => {
+    console.log("Works!");
+  },
+});
+
+popupDeleteCard.setEventListeners();
+
 // --- Profile Form Validator
 
 const profileEditFormValidator = new FormValidator(
