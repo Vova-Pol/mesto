@@ -18,11 +18,11 @@ export class UserInfo {
     return userData;
   }
 
-  setUserInfo({ name, about, avatarLink = null }) {
+  setUserInfo({ name, about, avatar = null }) {
     this._nameElement.textContent = name;
     this._occupationElement.textContent = about;
-    if (avatarLink) {
-      this._avatarElement.src = avatarLink;
+    if (avatar) {
+      this._avatarElement.src = avatar;
     }
   }
 }

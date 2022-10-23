@@ -1,8 +1,9 @@
 import { userData } from "../pages/index.js";
+import { PopupConfirm } from "./PopupConfirm.js";
 
 export class Card {
   constructor(
-    { name, link, likes, _id },
+    { name, link, likes, _id, owner },
     templateSelector,
     { handleCardClick }
   ) {
@@ -10,6 +11,7 @@ export class Card {
     this._link = link;
     this._likes = likes;
     this._id = _id;
+    this._owner = owner;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -35,6 +37,14 @@ export class Card {
     this._elementImage.alt = this._name;
     this._element.querySelector(".elements__title").textContent = this._name;
 
+    this._buttonDelete = this._element.querySelector(
+      ".elements__delete-button"
+    );
+
+    if (userData._id !== this._owner._id) {
+      this._buttonDelete.classList.add("elements__delete-button_hidden");
+    }
+
     this._setEventListeners();
 
     return this._element;
@@ -47,8 +57,8 @@ export class Card {
 
     this._element
       .querySelector(".elements__delete-button")
-      .addEventListener("click", () => {
-        this._handleDeleteButton();
+      .addEventListener("click", (evt) => {
+        this._handleDeleteButton(evt);
       });
 
     this._elementImage.addEventListener("click", () => {
@@ -67,10 +77,13 @@ export class Card {
   }
 
   _handleDeleteButton() {
-    const popupDeleteCard = document.querySelector("#popup-delete-card");
-    popupDeleteCard.classList.add("popup_opened");
+    const popupDeleteCard = new PopupConfirm(
+      "#popup-delete-card",
+      this._element,
+      this._id
+    );
 
-    // this._element.remove();
-    // this._element = null;
+    popupDeleteCard.setEventListeners();
+    popupDeleteCard.open();
   }
 }

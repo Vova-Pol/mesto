@@ -25,6 +25,7 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupConfirm } from "../components/PopupConfirm";
 import { UserInfo } from "../components/UserInfo.js";
 
 // --- Add cards from the box
@@ -72,11 +73,13 @@ fetch(userInfoRequestURL, {
   .then((data) => {
     userData.name = data.name;
     userData.about = data.about;
-    userData.avatarLink = data.avatar;
+    userData.avatar = data.avatar;
+    userData._id = data._id;
+
     userInfoElement.setUserInfo(userData);
   })
-  .catch(() => {
-    console.log("Что-то пошло не так.");
+  .catch((err) => {
+    console.log("Что-то пошло не так:" + err);
   });
 
 // --- Popup Edit Profile
@@ -89,16 +92,6 @@ const popupEdit = new PopupWithForm("#popup-edit", {
 });
 
 popupEdit.setEventListeners();
-
-// --- Popup Delete Card
-
-const popupDeleteCard = new PopupWithForm("#popup-delete-card", {
-  handleSubmitForm: () => {
-    console.log("Works!");
-  },
-});
-
-popupDeleteCard.setEventListeners();
 
 // --- Profile Form Validator
 
@@ -123,7 +116,13 @@ buttonEdit.addEventListener("click", () => {
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
   handleSubmitForm: (inputsValues) => {
-    const cardElement = createCard(inputsValues, "#place-card");
+    const cardData = {};
+    cardData.name = inputsValues.name;
+    cardData.link = inputsValues.link;
+    cardData.likes = [];
+    cardData.owner = userData;
+
+    const cardElement = createCard(cardData, "#place-card");
 
     fetch("https://mesto.nomoreparties.co/v1/cohort-52/cards", {
       method: "POST",
