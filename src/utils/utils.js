@@ -23,3 +23,25 @@ export function patchData(url, newData) {
     body: JSON.stringify(newData),
   });
 }
+
+export function putData(url, newData) {
+  fetch(url, {
+    method: "PUT",
+    headers: {
+      authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newData),
+  });
+}
+
+export function deleteData(url, newData) {
+  fetch(url, {
+    method: "DELETE",
+    headers: {
+      authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newData),
+  });
+}
