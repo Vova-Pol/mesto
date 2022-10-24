@@ -26,18 +26,34 @@ import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
+import { Api } from "../components/Api.js";
+
+// --- API
+
+const apiConfig = {
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-52/",
+  init: {
+    headers: {
+      authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
+      "Content-Type": "application/json",
+    },
+  },
+};
+
+const api = new Api(apiConfig);
 
 // --- Add cards from the box
 
 const cardsDataRequestURL = "https://mesto.nomoreparties.co/v1/cohort-52/cards";
 
-fetch(cardsDataRequestURL, {
-  headers: {
-    authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
-  },
-})
-  .then((res) => res.json())
-  .then((data) => {
+api
+  .getInitialCards()
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else console.log(res.status);
+  })
+  .then((cardsData) => {
     const cardsList = new Section(
       {
         renderer: (itemData) => {
@@ -48,7 +64,7 @@ fetch(cardsDataRequestURL, {
       ".elements__list"
     );
 
-    cardsList.renderItems(data);
+    cardsList.renderItems(cardsData);
   });
 
 // --- User Info
