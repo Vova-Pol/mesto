@@ -25,7 +25,6 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
-import { PopupConfirm } from "../components/PopupConfirm";
 import { UserInfo } from "../components/UserInfo.js";
 
 // --- Add cards from the box
@@ -87,8 +86,10 @@ fetch(userInfoRequestURL, {
 
 const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (inputsValues) => {
+    popupEdit.showRendering();
     userInfoElement.setUserInfo(inputsValues);
     patchData(userInfoRequestURL, inputsValues);
+    popupEdit.hideRendering("Сохранить");
   },
 });
 
@@ -123,8 +124,10 @@ const editAvatarRequestURL =
 
 const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
   handleSubmitForm: (inputsValues) => {
+    popupEditAvatar.showRendering();
     patchData(editAvatarRequestURL, inputsValues);
     userInfoElement.setUserAvatar(inputsValues);
+    popupEditAvatar.hideRendering("Сохранить");
   },
 });
 
@@ -148,6 +151,8 @@ buttonEditAvatar.addEventListener("click", () => {
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
   handleSubmitForm: (inputsValues) => {
+    popupAddPost.showRendering();
+
     const cardData = {};
     cardData.name = inputsValues.name;
     cardData.link = inputsValues.link;
@@ -165,6 +170,7 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
       body: JSON.stringify(inputsValues),
     });
 
+    popupAddPost.hideRendering("Создать");
     cardsContainer.prepend(cardElement);
   },
 });
