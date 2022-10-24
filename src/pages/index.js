@@ -77,6 +77,7 @@ fetch(userInfoRequestURL, {
     userData._id = data._id;
 
     userInfoElement.setUserInfo(userData);
+    userInfoElement.setUserAvatar(userData);
   })
   .catch((err) => {
     console.log("Что-то пошло не так:" + err);
@@ -112,6 +113,37 @@ buttonEdit.addEventListener("click", () => {
   popupEdit.open();
 });
 
+// --- Popup Edit Avatar
+const buttonEditAvatar = document.querySelector(
+  ".profile__edit-icon-container"
+);
+
+const editAvatarRequestURL =
+  "https://mesto.nomoreparties.co/v1/cohort-52/users/me/avatar";
+
+const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
+  handleSubmitForm: (inputsValues) => {
+    patchData(editAvatarRequestURL, inputsValues);
+    userInfoElement.setUserAvatar(inputsValues);
+  },
+});
+
+popupEditAvatar.setEventListeners();
+
+// --- Edit Avatar Form Validator
+
+const editAvatarFormValidator = new FormValidator(
+  validationConfig,
+  popupEditAvatar.formElement
+);
+editAvatarFormValidator.enableValidation();
+
+buttonEditAvatar.addEventListener("click", () => {
+  popupEditAvatar.open();
+  popupEditAvatar.formElement.reset();
+  editAvatarFormValidator.resetValidation();
+});
+
 // --- Popup Add Post
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
@@ -138,6 +170,8 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
 });
 
 popupAddPost.setEventListeners();
+
+// --- Add Post Form Validator
 
 const postAddFormValidator = new FormValidator(
   validationConfig,
