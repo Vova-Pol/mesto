@@ -1,6 +1,6 @@
 import { userData } from "../pages/index.js";
-import { deleteData, putData } from "../utils/utils.js";
 import { PopupConfirm } from "./PopupConfirm.js";
+import { api } from "../pages/index.js";
 
 export class Card {
   constructor(
@@ -80,23 +80,23 @@ export class Card {
   }
 
   _handleLikeButton() {
-    const likesArrRequsetURL = `https://mesto.nomoreparties.co/v1/cohort-52/cards/${this._id}/likes`;
+    const likesRequsetUrlEnding = `cards/${this._id}/likes`;
 
     if (this._isLiked()) {
       if (this._isButtonLikeActive()) {
         this._likesCounter.textContent = this._likes.length - 1;
-        deleteData(likesArrRequsetURL, userData);
+        api.sendRequest(likesRequsetUrlEnding, "DELETE", userData);
       } else if (!this._isButtonLikeActive()) {
         this._likesCounter.textContent = this._likes.length;
-        putData(likesArrRequsetURL, userData);
+        api.sendRequest(likesRequsetUrlEnding, "PUT", userData);
       }
     } else if (!this._isLiked()) {
       if (!this._isButtonLikeActive()) {
         this._likesCounter.textContent = this._likes.length + 1;
-        putData(likesArrRequsetURL, userData);
+        api.sendRequest(likesRequsetUrlEnding, "PUT", userData);
       } else if (this._isButtonLikeActive()) {
         this._likesCounter.textContent = this._likes.length;
-        deleteData(likesArrRequsetURL, userData);
+        api.sendRequest(likesRequsetUrlEnding, "DELETE", userData);
       }
     }
 

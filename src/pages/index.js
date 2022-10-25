@@ -1,6 +1,12 @@
 /**
  * Token: a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4
  * ID: cohort-52
+ *
+ * URLs:
+ * https://mesto.nomoreparties.co/v1/cohort-52/
+ * https://mesto.nomoreparties.co/v1/cohort-52/cards
+ * https://mesto.nomoreparties.co/v1/cohort-52/users/me/
+ * https://mesto.nomoreparties.co/v1/cohort-52/users/me/avatar
  */
 
 // Css import
@@ -14,11 +20,11 @@ import {
   occupationInput,
   buttonAddPost,
   validationConfig,
+  apiConfig,
 } from "../utils/constants.js";
 
 // Utils import
 import { createCard } from "../utils/utils.js";
-import { patchData } from "../utils/utils.js";
 
 // Components import
 import { FormValidator } from "../components/FormValidator.js";
@@ -30,21 +36,9 @@ import { Api } from "../components/Api.js";
 
 // --- API
 
-const apiConfig = {
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-52/",
-  init: {
-    headers: {
-      authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
-      "Content-Type": "application/json",
-    },
-  },
-};
-
-const api = new Api(apiConfig);
+export const api = new Api(apiConfig);
 
 // --- Add cards from the box
-
-const cardsDataRequestURL = "https://mesto.nomoreparties.co/v1/cohort-52/cards";
 
 api
   .getInitialCards()
@@ -65,11 +59,12 @@ api
     );
 
     cardsList.renderItems(cardsData);
+  })
+  .catch((err) => {
+    console.log("Что-то пошло не так: " + err);
   });
 
 // --- User Info
-
-const userInfoRequestURL = "https://nomoreparties.co/v1/cohort-52/users/me";
 
 const userInfoElement = new UserInfo({
   userNameSelector: ".profile__name",
@@ -79,12 +74,15 @@ const userInfoElement = new UserInfo({
 
 const userData = {};
 
-fetch(userInfoRequestURL, {
-  headers: {
-    authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
-  },
-})
-  .then((res) => res.json())
+api
+  .getUserInfo()
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      console.log(res.status);
+    }
+  })
   .then((data) => {
     userData.name = data.name;
     userData.about = data.about;
@@ -95,7 +93,7 @@ fetch(userInfoRequestURL, {
     userInfoElement.setUserAvatar(userData);
   })
   .catch((err) => {
-    console.log("Что-то пошло не так:" + err);
+    console.log("Что-то пошло не так: " + err);
   });
 
 // --- Popup Edit Profile
@@ -104,7 +102,7 @@ const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (inputsValues) => {
     popupEdit.showRendering();
     userInfoElement.setUserInfo(inputsValues);
-    patchData(userInfoRequestURL, inputsValues);
+    api.sendRequest("users/me", "PATCH", inputsValues);
     popupEdit.hideRendering("Сохранить");
   },
 });
@@ -135,13 +133,10 @@ const buttonEditAvatar = document.querySelector(
   ".profile__edit-icon-container"
 );
 
-const editAvatarRequestURL =
-  "https://mesto.nomoreparties.co/v1/cohort-52/users/me/avatar";
-
 const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
   handleSubmitForm: (inputsValues) => {
     popupEditAvatar.showRendering();
-    patchData(editAvatarRequestURL, inputsValues);
+    api.sendRequest("users/me/avatar", "PATCH", inputsValues);
     userInfoElement.setUserAvatar(inputsValues);
     popupEditAvatar.hideRendering("Сохранить");
   },
@@ -177,17 +172,10 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
 
     const cardElement = createCard(cardData, "#place-card");
 
-    fetch("https://mesto.nomoreparties.co/v1/cohort-52/cards", {
-      method: "POST",
-      headers: {
-        authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(inputsValues),
-    });
+    api.sendRequest("cards", "POST", inputsValues);
 
-    popupAddPost.hideRendering("Создать");
     cardsContainer.prepend(cardElement);
+    popupAddPost.hideRendering("Создать");
   },
 });
 
