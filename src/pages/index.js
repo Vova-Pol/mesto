@@ -19,6 +19,7 @@ import {
   nameInput,
   occupationInput,
   buttonAddPost,
+  buttonEditAvatar,
   validationConfig,
   apiConfig,
 } from "../utils/constants.js";
@@ -45,7 +46,7 @@ api
   .then((res) => {
     if (res.ok) {
       return res.json();
-    } else console.log(res.status);
+    } else console.log("Ошибка: " + res.status);
   })
   .then((cardsData) => {
     const cardsList = new Section(
@@ -80,7 +81,7 @@ api
     if (res.ok) {
       return res.json();
     } else {
-      console.log(res.status);
+      console.log("Ошибка: " + res.status);
     }
   })
   .then((data) => {
@@ -129,9 +130,6 @@ buttonEdit.addEventListener("click", () => {
 });
 
 // --- Popup Edit Avatar
-const buttonEditAvatar = document.querySelector(
-  ".profile__edit-icon-container"
-);
 
 const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
   handleSubmitForm: (inputsValues) => {

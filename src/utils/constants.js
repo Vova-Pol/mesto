@@ -7,6 +7,10 @@ export const occupationInput = document.querySelector(
 );
 export const buttonAddPost = document.querySelector(".profile__add-button");
 
+export const buttonEditAvatar = document.querySelector(
+  ".profile__edit-icon-container"
+);
+
 export const validationConfig = {
   inputSelector: ".popup__input",
   buttonSelector: ".popup__save-button",
