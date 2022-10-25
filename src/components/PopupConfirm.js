@@ -1,4 +1,5 @@
 import { Popup } from "./Popup.js";
+import { api } from "../pages/index.js";
 
 export class PopupConfirm extends Popup {
   constructor(popupSelector, cardElement, cardId) {
@@ -17,20 +18,9 @@ export class PopupConfirm extends Popup {
       this._cardElement.remove();
       this._cardElement = null;
 
-      const deleteCardRequestURL = `https://mesto.nomoreparties.co/v1/cohort-52/cards/${this._cardId}`;
+      const deleteCardUrlEnding = `cards/${this._cardId}`;
 
-      fetch(deleteCardRequestURL, {
-        method: "DELETE",
-        headers: {
-          authorization: "a1ce3bf4-12b8-45c2-ab0a-cd13960bbeb4",
-        },
-      })
-        .then((res) => {
-          console.log("Удаление прошло успешно: " + res);
-        })
-        .catch((err) => {
-          console.log("Ошибка: " + err);
-        });
+      api.sendRequest(deleteCardUrlEnding, "DELETE");
 
       this.close();
     });

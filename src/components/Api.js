@@ -12,9 +12,12 @@ export class Api {
     return fetch(`${this._baseUrl}users/me`, this._init);
   }
 
-  sendRequest(urlEnding, method, data) {
+  sendRequest(urlEnding, method, data = null) {
     this._init.method = method;
-    this._init.body = JSON.stringify(data);
+
+    if (data) {
+      this._init.body = JSON.stringify(data);
+    }
 
     const url = this._baseUrl + urlEnding;
 
