@@ -159,7 +159,7 @@ buttonEditAvatar.addEventListener("click", () => {
 // --- Popup Add Post
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
-  handleSubmitForm: (inputsValues) => {
+  handleSubmitForm: async (inputsValues) => {
     popupAddPost.showRendering();
 
     const cardData = {};
@@ -168,9 +168,10 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
     cardData.likes = [];
     cardData.owner = userData;
 
-    const cardElement = createCard(cardData, "#place-card");
+    const respond = await api.sendRequest("cards", "POST", inputsValues);
+    cardData._id = respond._id;
 
-    api.sendRequest("cards", "POST", inputsValues);
+    const cardElement = createCard(cardData, "#place-card");
 
     cardsContainer.prepend(cardElement);
     popupAddPost.hideRendering("Создать");

@@ -23,12 +23,10 @@ export class PopupWithForm extends Popup {
 
   showRendering() {
     this._submitButtonElement.textContent = "Сохранение...";
-    console.log("Сохранение...");
   }
 
   hideRendering(buttonText) {
     this._submitButtonElement.textContent = buttonText;
-    console.log("Сохранилось");
   }
 
   setEventListeners() {

@@ -13,21 +13,21 @@ export class Api {
   }
 
   sendRequest(urlEnding, method, data) {
-    {
-      this._init.method = method;
-      this._init.body = JSON.stringify(data);
+    this._init.method = method;
+    this._init.body = JSON.stringify(data);
 
-      const url = this._baseUrl + urlEnding;
+    const url = this._baseUrl + urlEnding;
 
-      fetch(url, this._init)
-        .then((res) => {
-          if (!res.ok) {
-            console.log("Сервер ответил ошибкой: " + res.status);
-          }
-        })
-        .catch((err) => {
-          console.log("Что-то пошло не так: " + err);
-        });
-    }
+    return fetch(url, this._init)
+      .then((res) => {
+        if (!res.ok) {
+          console.log("Сервер ответил ошибкой: " + res.status);
+        } else {
+          return res.json();
+        }
+      })
+      .catch((err) => {
+        console.log("Что-то пошло не так: " + err);
+      });
   }
 }
