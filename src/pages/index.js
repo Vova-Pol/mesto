@@ -24,20 +24,29 @@ import {
   apiConfig,
 } from "../utils/constants.js";
 
-// Utils import
-import { createCard } from "../utils/utils.js";
-
 // Components import
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
+import { Card } from "../components/Card.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 
 // --- API
 
 export const api = new Api(apiConfig);
+
+// Create a Card Function
+
+function createCard({ name, link, likes, _id, owner }, templateSelector) {
+  const card = new Card({ name, link, likes, _id, owner }, templateSelector, {
+    handleCardClick: () => {
+      popupPreview.open(link, name);
+    },
+  });
+  return card.generateCard();
+}
 
 // --- Add cards from the box
 
