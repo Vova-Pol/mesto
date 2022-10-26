@@ -1,12 +1,11 @@
 import { userData } from "../pages/index.js";
 import { PopupConfirm } from "./PopupConfirm.js";
-import { api } from "../pages/index.js";
 
 export class Card {
   constructor(
     { name, link, likes, _id, owner },
     templateSelector,
-    { handleCardClick, putLikeRequest, deleteLikeRequest }
+    { handleCardClick, putLikeRequest, deleteLikeRequest, handleDeleteButton }
   ) {
     this._name = name;
     this._link = link;
@@ -17,6 +16,7 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._putLikeRequest = putLikeRequest;
     this._deleteLikeRequest = deleteLikeRequest;
+    this._handleDeleteButton = handleDeleteButton;
   }
 
   _getElement() {
@@ -32,6 +32,7 @@ export class Card {
     this._element = this._getElement();
     this._elementImage = this._element.querySelector(".elements__image");
     this._buttonLike = this._element.querySelector(".elements__like-button");
+    this._buttonDelete;
 
     if (this._isLiked()) {
       this._buttonLike.classList.add("elements__like-button_active");
@@ -62,11 +63,9 @@ export class Card {
       this._handleLikeButton();
     });
 
-    this._element
-      .querySelector(".elements__delete-button")
-      .addEventListener("click", (evt) => {
-        this._handleDeleteButton(evt);
-      });
+    this._buttonDelete.addEventListener("click", () => {
+      this._handleDeleteButton(this._id);
+    });
 
     this._elementImage.addEventListener("click", () => {
       this._handleCardClick();
@@ -97,14 +96,8 @@ export class Card {
     }
   }
 
-  _handleDeleteButton() {
-    const popupDeleteCard = new PopupConfirm(
-      "#popup-delete-card",
-      this._element,
-      this._id
-    );
-
-    popupDeleteCard.setEventListeners();
-    popupDeleteCard.open();
+  removeCardElement() {
+    this._element.remove();
+    this._element = null;
   }
 }

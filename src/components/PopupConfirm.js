@@ -1,11 +1,10 @@
 import { Popup } from "./Popup.js";
-import { api } from "../pages/index.js";
 
 export class PopupConfirm extends Popup {
-  constructor(popupSelector, cardElement, cardId) {
+  constructor(popupSelector, cardId, { handleSubmit }) {
     super(popupSelector);
-    this._cardElement = cardElement;
     this._cardId = cardId;
+    this._handleSubmit = handleSubmit;
     this._formElement = this._element.querySelector("form");
   }
 
@@ -14,15 +13,7 @@ export class PopupConfirm extends Popup {
 
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-
-      this._cardElement.remove();
-      this._cardElement = null;
-
-      const deleteCardUrlEnding = `cards/${this._cardId}`;
-
-      api.sendRequest(deleteCardUrlEnding, "DELETE");
-
-      this.close();
+      this._handleSubmit(this._cardId);
     });
   }
 }

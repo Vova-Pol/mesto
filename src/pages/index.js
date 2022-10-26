@@ -29,6 +29,7 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupConfirm } from "../components/PopupConfirm.js";
 import { Card } from "../components/Card.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
@@ -49,6 +50,19 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
     },
     deleteLikeRequest: (urlEnding) => {
       return api.sendRequest(urlEnding, "DELETE", userData);
+    },
+    handleDeleteButton: (cardId) => {
+      const popupDeleteCard = new PopupConfirm("#popup-delete-card", cardId, {
+        handleSubmit: (cardId) => {
+          api.sendRequest(`cards/${cardId}`, "DELETE").then(() => {
+            card.removeCardElement();
+            popupDeleteCard.close();
+          });
+        },
+      });
+
+      popupDeleteCard.setEventListeners();
+      popupDeleteCard.open();
     },
   });
   return card.generateCard();
