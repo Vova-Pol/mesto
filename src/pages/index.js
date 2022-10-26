@@ -44,6 +44,12 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
     handleCardClick: () => {
       popupPreview.open(link, name);
     },
+    putLikeRequest: (urlEnding) => {
+      return api.sendRequest(urlEnding, "PUT", userData);
+    },
+    deleteLikeRequest: (urlEnding) => {
+      return api.sendRequest(urlEnding, "DELETE", userData);
+    },
   });
   return card.generateCard();
 }

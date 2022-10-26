@@ -6,7 +6,7 @@ export class Card {
   constructor(
     { name, link, likes, _id, owner },
     templateSelector,
-    { handleCardClick }
+    { handleCardClick, putLikeRequest, deleteLikeRequest }
   ) {
     this._name = name;
     this._link = link;
@@ -15,6 +15,8 @@ export class Card {
     this._owner = owner;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._putLikeRequest = putLikeRequest;
+    this._deleteLikeRequest = deleteLikeRequest;
   }
 
   _getElement() {
@@ -75,32 +77,24 @@ export class Card {
     return this._likes.some((obj) => obj._id === userData._id);
   }
 
-  _isButtonLikeActive() {
-    return this._buttonLike.classList.contains("elements__like-button_active");
+  _setLike(cardData) {
+    this._likes = cardData.likes;
+    this._likesCounter.textContent = cardData.likes.length;
+    this._buttonLike.classList.toggle("elements__like-button_active");
   }
 
   _handleLikeButton() {
     const likesRequsetUrlEnding = `cards/${this._id}/likes`;
 
-    if (this._isLiked()) {
-      if (this._isButtonLikeActive()) {
-        this._likesCounter.textContent = this._likes.length - 1;
-        api.sendRequest(likesRequsetUrlEnding, "DELETE", userData);
-      } else if (!this._isButtonLikeActive()) {
-        this._likesCounter.textContent = this._likes.length;
-        api.sendRequest(likesRequsetUrlEnding, "PUT", userData);
-      }
-    } else if (!this._isLiked()) {
-      if (!this._isButtonLikeActive()) {
-        this._likesCounter.textContent = this._likes.length + 1;
-        api.sendRequest(likesRequsetUrlEnding, "PUT", userData);
-      } else if (this._isButtonLikeActive()) {
-        this._likesCounter.textContent = this._likes.length;
-        api.sendRequest(likesRequsetUrlEnding, "DELETE", userData);
-      }
+    if (!this._isLiked()) {
+      this._putLikeRequest(likesRequsetUrlEnding).then((cardData) => {
+        this._setLike(cardData);
+      });
+    } else {
+      this._deleteLikeRequest(likesRequsetUrlEnding).then((cardData) => {
+        this._setLike(cardData);
+      });
     }
-
-    this._buttonLike.classList.toggle("elements__like-button_active");
   }
 
   _handleDeleteButton() {
