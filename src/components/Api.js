@@ -5,32 +5,31 @@ export class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}cards`, this._init);
+    return this.sendRequest("cards", "GET");
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}users/me`, this._init);
+    return this.sendRequest("users/me", "GET");
   }
 
   sendRequest(urlEnding, method, data = null) {
     this._init.method = method;
+    const url = this._baseUrl + urlEnding;
 
     if (data) {
       this._init.body = JSON.stringify(data);
     }
 
-    const url = this._baseUrl + urlEnding;
-
     return fetch(url, this._init)
       .then((res) => {
-        if (!res.ok) {
-          console.log("Сервер ответил ошибкой: " + res.status);
-        } else {
+        if (res.ok) {
           return res.json();
+        } else {
+          return Promise.reject("Сервер ответил ошибкой: " + res.status);
         }
       })
       .catch((err) => {
-        console.log("Что-то пошло не так: " + err);
+        throw new Error(err);
       });
   }
 }

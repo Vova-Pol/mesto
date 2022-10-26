@@ -41,29 +41,19 @@ export const api = new Api(apiConfig);
 
 // --- Add cards from the box
 
-api
-  .getInitialCards()
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else console.log("Ошибка: " + res.status);
-  })
-  .then((cardsData) => {
-    const cardsList = new Section(
-      {
-        renderer: (itemData) => {
-          const card = createCard(itemData, "#place-card");
-          cardsList.addItem(card);
-        },
+api.getInitialCards().then((cardsData) => {
+  const cardsList = new Section(
+    {
+      renderer: (itemData) => {
+        const card = createCard(itemData, "#place-card");
+        cardsList.addItem(card);
       },
-      ".elements__list"
-    );
+    },
+    ".elements__list"
+  );
 
-    cardsList.renderItems(cardsData);
-  })
-  .catch((err) => {
-    console.log("Что-то пошло не так: " + err);
-  });
+  cardsList.renderItems(cardsData);
+});
 
 // --- User Info
 
@@ -75,27 +65,15 @@ const userInfoElement = new UserInfo({
 
 const userData = {};
 
-api
-  .getUserInfo()
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      console.log("Ошибка: " + res.status);
-    }
-  })
-  .then((data) => {
-    userData.name = data.name;
-    userData.about = data.about;
-    userData.avatar = data.avatar;
-    userData._id = data._id;
+api.getUserInfo().then((data) => {
+  userData.name = data.name;
+  userData.about = data.about;
+  userData.avatar = data.avatar;
+  userData._id = data._id;
 
-    userInfoElement.setUserInfo(userData);
-    userInfoElement.setUserAvatar(userData);
-  })
-  .catch((err) => {
-    console.log("Что-то пошло не так: " + err);
-  });
+  userInfoElement.setUserInfo(userData);
+  userInfoElement.setUserAvatar(userData);
+});
 
 // --- Popup Edit Profile
 
