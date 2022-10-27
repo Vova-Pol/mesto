@@ -5,12 +5,27 @@ export class PopupConfirm extends Popup {
     super(popupSelector);
     this._handleSubmit = handleSubmit;
     this._formElement = this._element.querySelector("form");
+    this._handleSubmitButtonBound = this._handleSubmitButton.bind(this);
   }
 
-  setSubmitListener(id, card) {
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this._handleSubmit(id, card);
-    });
+  setCardData(id, card) {
+    this._cardId = id;
+    this._cardElement = card;
+  }
+
+  _handleSubmitButton(evt) {
+    evt.preventDefault();
+    this._handleSubmit(this._cardId, this._cardElement);
+  }
+
+  addSubmitListener() {
+    this._formElement.addEventListener("submit", this._handleSubmitButtonBound);
+  }
+
+  removeSubmitListener() {
+    this._formElement.removeEventListenet(
+      "submit",
+      this._handleSubmitButtonBound
+    );
   }
 }

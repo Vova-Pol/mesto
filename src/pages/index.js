@@ -52,7 +52,8 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
       return api.sendRequest(urlEnding, "DELETE", userData);
     },
     handleDeleteButton: (cardId, cardElement) => {
-      popupDeleteCard.setSubmitListener(cardId, cardElement);
+      popupDeleteCard.setCardData(cardId, cardElement);
+      popupDeleteCard.addSubmitListener();
       popupDeleteCard.open();
     },
   });
@@ -67,6 +68,7 @@ const popupDeleteCard = new PopupConfirm("#popup-delete-card", {
       cardElement.remove();
       cardElement = null;
       popupDeleteCard.close();
+      popupDeleteCard.removeSubmitListener();
     });
   },
 });
