@@ -19,13 +19,13 @@ export class PopupConfirm extends Popup {
   }
 
   addSubmitListener() {
-    this._formElement.addEventListener("submit", this._handleSubmitButtonBound);
-  }
-
-  removeSubmitListener() {
-    this._formElement.removeEventListenet(
+    this._formElement.addEventListener(
       "submit",
-      this._handleSubmitButtonBound
+      (evt) => {
+        evt.preventDefault();
+        this._handleSubmit(this._cardId, this._cardElement);
+      },
+      { once: true }
     );
   }
 }

@@ -67,7 +67,6 @@ const popupDeleteCard = new PopupConfirm("#popup-delete-card", {
       cardElement.remove();
       cardElement = null;
       popupDeleteCard.close();
-      popupDeleteCard.removeSubmitListener();
     });
   },
 });
