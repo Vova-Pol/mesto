@@ -51,22 +51,27 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
     deleteLikeRequest: (urlEnding) => {
       return api.sendRequest(urlEnding, "DELETE", userData);
     },
-    handleDeleteButton: (cardId) => {
-      const popupDeleteCard = new PopupConfirm("#popup-delete-card", cardId, {
-        handleSubmit: (cardId) => {
-          api.sendRequest(`cards/${cardId}`, "DELETE").then(() => {
-            card.removeCardElement();
-            popupDeleteCard.close();
-          });
-        },
-      });
-
-      popupDeleteCard.setEventListeners();
+    handleDeleteButton: (cardId, cardElement) => {
+      popupDeleteCard.setSubmitListener(cardId, cardElement);
       popupDeleteCard.open();
     },
   });
   return card.generateCard();
 }
+
+// --- Popup Delete Confirm
+
+const popupDeleteCard = new PopupConfirm("#popup-delete-card", {
+  handleSubmit: (cardId, cardElement) => {
+    api.sendRequest(`cards/${cardId}`, "DELETE").then(() => {
+      cardElement.remove();
+      cardElement = null;
+      popupDeleteCard.close();
+    });
+  },
+});
+
+popupDeleteCard.setEventListeners();
 
 // --- Add cards from the box
 

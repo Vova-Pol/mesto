@@ -64,7 +64,7 @@ export class Card {
     });
 
     this._buttonDelete.addEventListener("click", () => {
-      this._handleDeleteButton(this._id);
+      this._handleDeleteButton(this._id, this._element);
     });
 
     this._elementImage.addEventListener("click", () => {
