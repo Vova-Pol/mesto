@@ -75,22 +75,6 @@ const popupDeleteCard = new PopupConfirm("#popup-delete-card", {
 
 popupDeleteCard.setEventListeners();
 
-// --- Add cards from the box
-
-api.getInitialCards().then((cardsData) => {
-  const cardsList = new Section(
-    {
-      renderer: (itemData) => {
-        const card = createCard(itemData, "#place-card");
-        cardsList.addItem(card);
-      },
-    },
-    ".elements__list"
-  );
-
-  cardsList.renderItems(cardsData);
-});
-
 // --- User Info
 
 const userInfoElement = new UserInfo({
@@ -99,17 +83,36 @@ const userInfoElement = new UserInfo({
   userAvatarSelector: ".profile__picture",
 });
 
+// --- Request User Data and Cards Data
+
 const userData = {};
 
-api.getUserInfo().then((data) => {
-  userData.name = data.name;
-  userData.about = data.about;
-  userData.avatar = data.avatar;
-  userData._id = data._id;
+api
+  .getUserInfo()
+  .then((data) => {
+    userData.name = data.name;
+    userData.about = data.about;
+    userData.avatar = data.avatar;
+    userData._id = data._id;
 
-  userInfoElement.setUserInfo(userData);
-  userInfoElement.setUserAvatar(userData);
-});
+    userInfoElement.setUserInfo(userData);
+    userInfoElement.setUserAvatar(userData);
+  })
+  .then(() => {
+    api.getInitialCards().then((cardsData) => {
+      const cardsList = new Section(
+        {
+          renderer: (itemData) => {
+            const card = createCard(itemData, "#place-card");
+            cardsList.addItem(card);
+          },
+        },
+        ".elements__list"
+      );
+
+      cardsList.renderItems(cardsData);
+    });
+  });
 
 // --- Popup Edit Profile
 
