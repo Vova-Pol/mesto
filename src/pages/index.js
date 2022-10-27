@@ -14,7 +14,6 @@ import "./index.css";
 
 // Constants import
 import {
-  cardsContainer,
   buttonEdit,
   nameInput,
   occupationInput,
@@ -83,6 +82,18 @@ const userInfoElement = new UserInfo({
   userAvatarSelector: ".profile__picture",
 });
 
+// --- Cards List
+
+const cardsList = new Section(
+  {
+    renderer: (itemData) => {
+      const card = createCard(itemData, "#place-card");
+      cardsList.appendItem(card);
+    },
+  },
+  ".elements__list"
+);
+
 // --- Request User Data and Cards Data
 
 const userData = {};
@@ -100,16 +111,6 @@ api
   })
   .then(() => {
     api.getInitialCards().then((cardsData) => {
-      const cardsList = new Section(
-        {
-          renderer: (itemData) => {
-            const card = createCard(itemData, "#place-card");
-            cardsList.addItem(card);
-          },
-        },
-        ".elements__list"
-      );
-
       cardsList.renderItems(cardsData);
     });
   });
@@ -189,8 +190,8 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
     cardData._id = respond._id;
 
     const cardElement = createCard(cardData, "#place-card");
+    cardsList.prependItem(cardElement);
 
-    cardsContainer.prepend(cardElement);
     popupAddPost.hideRendering("Создать");
   },
 });

@@ -1,5 +1,3 @@
-export const cardsContainer = document.querySelector(".elements__list");
-
 export const buttonEdit = document.querySelector(".profile__edit-button");
 export const nameInput = document.querySelector("#profile-name-input");
 export const occupationInput = document.querySelector(
