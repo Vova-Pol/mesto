@@ -45,10 +45,14 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
       popupPreview.open(link, name);
     },
     putLikeRequest: (urlEnding) => {
-      return api.sendRequest(urlEnding, "PUT", userData);
+      return api.sendRequest(urlEnding, "PUT", userData).catch((err) => {
+        throw new Error(err);
+      });
     },
     deleteLikeRequest: (urlEnding) => {
-      return api.sendRequest(urlEnding, "DELETE", userData);
+      return api.sendRequest(urlEnding, "DELETE", userData).catch((err) => {
+        throw new Error(err);
+      });
     },
     handleDeleteButton: (cardId, cardElement) => {
       popupDeleteCard.setCardData(cardId, cardElement);
@@ -63,11 +67,16 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
 
 const popupDeleteCard = new PopupConfirm("#popup-delete-card", {
   handleSubmit: (cardId, cardElement) => {
-    api.sendRequest(`cards/${cardId}`, "DELETE").then(() => {
-      cardElement.remove();
-      cardElement = null;
-      popupDeleteCard.close();
-    });
+    api
+      .sendRequest(`cards/${cardId}`, "DELETE")
+      .then(() => {
+        cardElement.remove();
+        cardElement = null;
+        popupDeleteCard.close();
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   },
 });
 
@@ -98,7 +107,7 @@ const cardsList = new Section(
 const userData = {};
 
 api
-  .getUserInfo()
+  .requestUserInfo()
   .then((data) => {
     userData.name = data.name;
     userData.about = data.about;
@@ -109,9 +118,17 @@ api
     userInfoElement.setUserAvatar(userData);
   })
   .then(() => {
-    api.getInitialCards().then((cardsData) => {
-      cardsList.renderItems(cardsData);
-    });
+    api
+      .requestInitialCards()
+      .then((cardsData) => {
+        cardsList.renderItems(cardsData);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  })
+  .catch((err) => {
+    throw new Error(err);
   });
 
 // --- Popup Edit Profile
@@ -120,7 +137,9 @@ const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (inputsValues) => {
     popupEdit.showRendering();
     userInfoElement.setUserInfo(inputsValues);
-    api.sendRequest("users/me", "PATCH", inputsValues);
+    api.sendRequest("users/me", "PATCH", inputsValues).catch((err) => {
+      throw new Error(err);
+    });
     popupEdit.hideRendering("Сохранить");
   },
 });
@@ -138,7 +157,6 @@ profileEditFormValidator.enableValidation();
 
 buttonEdit.addEventListener("click", () => {
   const userData = userInfoElement.getUserInfo();
-
   nameInput.value = userData.name;
   occupationInput.value = userData.occupation;
 
@@ -151,7 +169,9 @@ buttonEdit.addEventListener("click", () => {
 const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
   handleSubmitForm: (inputsValues) => {
     popupEditAvatar.showRendering();
-    api.sendRequest("users/me/avatar", "PATCH", inputsValues);
+    api.sendRequest("users/me/avatar", "PATCH", inputsValues).catch((err) => {
+      throw new Error(err);
+    });
     userInfoElement.setUserAvatar(inputsValues);
     popupEditAvatar.hideRendering("Сохранить");
   },
@@ -177,21 +197,25 @@ buttonEditAvatar.addEventListener("click", () => {
 
 const popupAddPost = new PopupWithForm("#popup-add-post", {
   handleSubmitForm: async (inputsValues) => {
-    popupAddPost.showRendering();
+    try {
+      popupAddPost.showRendering();
 
-    const cardData = {};
-    cardData.name = inputsValues.name;
-    cardData.link = inputsValues.link;
-    cardData.likes = [];
-    cardData.owner = userData;
+      const cardData = {};
+      cardData.name = inputsValues.name;
+      cardData.link = inputsValues.link;
+      cardData.likes = [];
+      cardData.owner = userData;
 
-    const respond = await api.sendRequest("cards", "POST", inputsValues);
-    cardData._id = respond._id;
+      const respond = await api.sendRequest("cards", "POST", inputsValues);
+      cardData._id = respond._id;
 
-    const cardElement = createCard(cardData, "#place-card");
-    cardsList.prependItem(cardElement);
+      const cardElement = createCard(cardData, "#place-card");
+      cardsList.prependItem(cardElement);
 
-    popupAddPost.hideRendering("Создать");
+      popupAddPost.hideRendering("Создать");
+    } catch (err) {
+      throw new Error(err);
+    }
   },
 });
 

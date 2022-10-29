@@ -4,11 +4,11 @@ export class Api {
     this._init = apiConfig.init;
   }
 
-  getInitialCards() {
+  requestInitialCards() {
     return this.sendRequest("cards", "GET");
   }
 
-  getUserInfo() {
+  requestUserInfo() {
     return this.sendRequest("users/me", "GET");
   }
 
@@ -20,16 +20,12 @@ export class Api {
       this._init.body = JSON.stringify(data);
     }
 
-    return fetch(url, this._init)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject("Сервер ответил ошибкой: " + res.status);
-        }
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
+    return fetch(url, this._init).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject("Сервер ответил ошибкой: " + res.status);
+      }
+    });
   }
 }
