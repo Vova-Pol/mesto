@@ -37,7 +37,6 @@ export class PopupWithForm extends Popup {
 
       const inputsValues = this._getInputsValues();
       this._handleSubmitForm(inputsValues);
-      this.close();
     });
   }
 

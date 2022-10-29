@@ -136,10 +136,15 @@ api
 const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (inputsValues) => {
     popupEdit.showRendering();
-    userInfoElement.setUserInfo(inputsValues);
-    api.sendRequest("users/me", "PATCH", inputsValues).catch((err) => {
-      throw new Error(err);
-    });
+    api
+      .sendRequest("users/me", "PATCH", inputsValues)
+      .then(() => {
+        userInfoElement.setUserInfo(inputsValues);
+        popupEdit.close();
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
     popupEdit.hideRendering("Сохранить");
   },
 });
@@ -169,10 +174,16 @@ buttonEdit.addEventListener("click", () => {
 const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
   handleSubmitForm: (inputsValues) => {
     popupEditAvatar.showRendering();
-    api.sendRequest("users/me/avatar", "PATCH", inputsValues).catch((err) => {
-      throw new Error(err);
-    });
-    userInfoElement.setUserAvatar(inputsValues);
+    api
+      .sendRequest("users/me/avatar", "PATCH", inputsValues)
+      .then(() => {
+        userInfoElement.setUserAvatar(inputsValues);
+        popupEditAvatar.close();
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+
     popupEditAvatar.hideRendering("Сохранить");
   },
 });
@@ -212,6 +223,7 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
       const cardElement = createCard(cardData, "#place-card");
       cardsList.prependItem(cardElement);
 
+      popupAddPost.close();
       popupAddPost.hideRendering("Создать");
     } catch (err) {
       throw new Error(err);
