@@ -75,7 +75,7 @@ export class Card {
     return this._likes.some((obj) => obj._id === userData._id);
   }
 
-  _setLike(cardData) {
+  setLike(cardData) {
     this._likes = cardData.likes;
     this._likesCounter.textContent = cardData.likes.length;
     this._buttonLike.classList.toggle("elements__like-button_active");
@@ -85,13 +85,9 @@ export class Card {
     const likesRequsetUrlEnding = `cards/${this._id}/likes`;
 
     if (!this._isLiked()) {
-      this._putLikeRequest(likesRequsetUrlEnding).then((cardData) => {
-        this._setLike(cardData);
-      });
+      this._putLikeRequest(likesRequsetUrlEnding);
     } else {
-      this._deleteLikeRequest(likesRequsetUrlEnding).then((cardData) => {
-        this._setLike(cardData);
-      });
+      this._deleteLikeRequest(likesRequsetUrlEnding);
     }
   }
 

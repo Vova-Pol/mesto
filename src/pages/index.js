@@ -45,14 +45,24 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
       popupPreview.open(link, name);
     },
     putLikeRequest: (urlEnding) => {
-      return api.sendRequest(urlEnding, "PUT", userData).catch((err) => {
-        console.error(err);
-      });
+      return api
+        .sendRequest(urlEnding, "PUT", userData)
+        .then((cardData) => {
+          card.setLike(cardData);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
     deleteLikeRequest: (urlEnding) => {
-      return api.sendRequest(urlEnding, "DELETE", userData).catch((err) => {
-        console.error(err);
-      });
+      return api
+        .sendRequest(urlEnding, "DELETE", userData)
+        .then((cardData) => {
+          card.setLike(cardData);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
     handleDeleteButton: (cardId) => {
       popupDeleteCard.setCardData(cardId, card);
