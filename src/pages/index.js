@@ -46,12 +46,12 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
     },
     putLikeRequest: (urlEnding) => {
       return api.sendRequest(urlEnding, "PUT", userData).catch((err) => {
-        throw new Error(err);
+        console.error(err);
       });
     },
     deleteLikeRequest: (urlEnding) => {
       return api.sendRequest(urlEnding, "DELETE", userData).catch((err) => {
-        throw new Error(err);
+        console.error(err);
       });
     },
     handleDeleteButton: (cardId, cardElement) => {
@@ -75,7 +75,7 @@ const popupDeleteCard = new PopupConfirm("#popup-delete-card", {
         popupDeleteCard.close();
       })
       .catch((err) => {
-        throw new Error(err);
+        console.error(err);
       });
   },
 });
@@ -124,11 +124,11 @@ api
         cardsList.renderItems(cardsData);
       })
       .catch((err) => {
-        throw new Error(err);
+        console.error(err);
       });
   })
   .catch((err) => {
-    throw new Error(err);
+    console.error(err);
   });
 
 // --- Popup Edit Profile
@@ -143,7 +143,7 @@ const popupEdit = new PopupWithForm("#popup-edit", {
         popupEdit.close();
       })
       .catch((err) => {
-        throw new Error(err);
+        console.error(err);
       });
     popupEdit.hideRendering("Сохранить");
   },
@@ -181,7 +181,7 @@ const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
         popupEditAvatar.close();
       })
       .catch((err) => {
-        throw new Error(err);
+        console.error(err);
       });
 
     popupEditAvatar.hideRendering("Сохранить");
@@ -226,7 +226,7 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
       popupAddPost.close();
       popupAddPost.hideRendering("Создать");
     } catch (err) {
-      throw new Error(err);
+      console.error(err);
     }
   },
 });
