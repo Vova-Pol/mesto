@@ -134,7 +134,7 @@ api
 
 const popupEdit = new PopupWithForm("#popup-edit", {
   handleSubmitForm: (inputsValues) => {
-    popupEdit.showRendering();
+    popupEdit.changeSubmitButtonText("Сохранение...");
     api
       .sendRequest("users/me", "PATCH", inputsValues)
       .then(() => {
@@ -144,7 +144,7 @@ const popupEdit = new PopupWithForm("#popup-edit", {
       .catch((err) => {
         console.error(err);
       });
-    popupEdit.hideRendering("Сохранить");
+    popupEdit.changeSubmitButtonText("Сохранить");
   },
 });
 
@@ -172,7 +172,7 @@ buttonEdit.addEventListener("click", () => {
 
 const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
   handleSubmitForm: (inputsValues) => {
-    popupEditAvatar.showRendering();
+    popupEditAvatar.changeSubmitButtonText("Сохранение...");
     api
       .sendRequest("users/me/avatar", "PATCH", inputsValues)
       .then(() => {
@@ -183,7 +183,7 @@ const popupEditAvatar = new PopupWithForm("#popup-avatar-image", {
         console.error(err);
       });
 
-    popupEditAvatar.hideRendering("Сохранить");
+    popupEditAvatar.changeSubmitButtonText("Сохранить");
   },
 });
 
@@ -208,7 +208,7 @@ buttonEditAvatar.addEventListener("click", () => {
 const popupAddPost = new PopupWithForm("#popup-add-post", {
   handleSubmitForm: async (inputsValues) => {
     try {
-      popupAddPost.showRendering();
+      popupAddPost.changeSubmitButtonText("Сохранение...");
 
       const cardData = {};
       cardData.name = inputsValues.name;
@@ -223,7 +223,7 @@ const popupAddPost = new PopupWithForm("#popup-add-post", {
       cardsList.prependItem(cardElement);
 
       popupAddPost.close();
-      popupAddPost.hideRendering("Создать");
+      popupAddPost.changeSubmitButtonText("Создать");
     } catch (err) {
       console.error(err);
     }
