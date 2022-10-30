@@ -54,8 +54,8 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
         console.error(err);
       });
     },
-    handleDeleteButton: (cardId, cardElement) => {
-      popupDeleteCard.setCardData(cardId, cardElement);
+    handleDeleteButton: (cardId) => {
+      popupDeleteCard.setCardData(cardId, card);
       popupDeleteCard.addSubmitListener();
       popupDeleteCard.open();
     },
@@ -66,12 +66,11 @@ function createCard({ name, link, likes, _id, owner }, templateSelector) {
 // --- Popup Delete Confirm
 
 const popupDeleteCard = new PopupConfirm("#popup-delete-card", {
-  handleSubmit: (cardId, cardElement) => {
+  handleSubmit: (cardId, card) => {
     api
       .sendRequest(`cards/${cardId}`, "DELETE")
       .then(() => {
-        cardElement.remove();
-        cardElement = null;
+        card.removeCardElement();
         popupDeleteCard.close();
       })
       .catch((err) => {

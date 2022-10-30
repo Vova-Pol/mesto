@@ -1,5 +1,4 @@
 import { userData } from "../pages/index.js";
-import { PopupConfirm } from "./PopupConfirm.js";
 
 export class Card {
   constructor(
@@ -64,7 +63,7 @@ export class Card {
     });
 
     this._buttonDelete.addEventListener("click", () => {
-      this._handleDeleteButton(this._id, this._element);
+      this._handleDeleteButton(this._id);
     });
 
     this._elementImage.addEventListener("click", () => {
