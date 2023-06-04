@@ -6,7 +6,7 @@
 
 ### Demo
 
-Демо проекта на GitHub Pages: https://vova-pol.github.io/mesto-vova-pol/
+Демо проекта на GitHub Pages: [https://vova-pol.github.io/mesto/](https://vova-pol.github.io/mesto/)
 
 ## Функционал
 
