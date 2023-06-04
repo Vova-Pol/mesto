@@ -27,6 +27,5 @@ export class Api {
         return Promise.reject("Сервер ответил ошибкой: " + res.status);
       }
     });
-    // res.json(); и Promise.reject(); наставник посоветовал оставить в методе класса.
   }
 }
